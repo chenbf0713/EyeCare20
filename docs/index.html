@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EyeCare20 · 68KB 的 Windows 护眼提醒小工具</title>
+<meta name="description" content="基于 20-20-20 法则的 Windows 护眼提醒：望远、眨眼、久坐、喝水四类提醒智能合并，休息中自动暂停，全自动更新。68KB 零依赖绿色单文件。">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --green: #048A4A;
+    --green-dark: #036B39;
+    --green-light: #E6F4ED;
+    --text: #1A1A1A;
+    --sub: #707070;
+    --bg: #FFFFFF;
+    --track: #E9E9E9;
+    --warn: #D67A27;
+  }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei UI", "PingFang SC", sans-serif;
+    color: var(--text); background: var(--bg); line-height: 1.7;
+  }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
+
+  /* hero */
+  .hero { text-align: center; padding: 88px 24px 72px; }
+  .logo {
+    width: 84px; height: 84px; margin: 0 auto 28px; display: block;
+  }
+  .hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -1px; }
+  .hero .tagline { font-size: 20px; color: var(--sub); margin: 14px 0 8px; }
+  .hero .rule { font-size: 15px; color: var(--green); font-weight: 600; }
+  .badges { margin-top: 22px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+  .badge {
+    font-size: 12.5px; color: var(--green-dark); background: var(--green-light);
+    border-radius: 20px; padding: 4px 14px; font-weight: 600;
+  }
+  .dl-box { margin-top: 38px; display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+  .btn {
+    display: inline-block; text-decoration: none; font-size: 16px; font-weight: 600;
+    padding: 14px 34px; border-radius: 10px; transition: transform .15s, box-shadow .15s;
+    min-width: 220px; text-align: center;
+  }
+  .btn-primary { background: var(--green); color: #fff; box-shadow: 0 4px 14px rgba(4,138,74,.25); }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-2px); }
+  .btn-ghost { background: #fff; color: var(--green-dark); border: 1.5px solid var(--green); }
+  .btn-ghost:hover { background: var(--green-light); transform: translateY(-2px); }
+  .dl-hint { margin-top: 14px; font-size: 13px; color: var(--sub); }
+  .dl-hint b { color: var(--warn); }
+
+  /* features */
+  .section { padding: 64px 0; }
+  .section h2 { font-size: 30px; text-align: center; margin-bottom: 44px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+  .card {
+    border: 1px solid #EEE; border-radius: 14px; padding: 26px;
+    transition: box-shadow .2s, border-color .2s;
+  }
+  .card:hover { box-shadow: 0 6px 24px rgba(0,0,0,.07); border-color: var(--green); }
+  .card .num {
+    display: inline-block; font-size: 13px; font-weight: 700; color: var(--green);
+    background: var(--green-light); border-radius: 6px; padding: 2px 10px; margin-bottom: 12px;
+  }
+  .card h3 { font-size: 17.5px; margin-bottom: 8px; }
+  .card p { font-size: 14.5px; color: var(--sub); }
+
+  /* shots */
+  .shots { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start; }
+  .shots figure { text-align: center; }
+  .shots img {
+    width: 100%; border-radius: 12px; border: 1px solid #EEE;
+    box-shadow: 0 8px 30px rgba(0,0,0,.08);
+  }
+  .shots figcaption { font-size: 13.5px; color: var(--sub); margin-top: 10px; }
+
+  /* how */
+  .steps { max-width: 640px; margin: 0 auto; }
+  .step { display: flex; gap: 18px; padding: 18px 0; border-bottom: 1px solid #F2F2F2; }
+  .step:last-child { border-bottom: none; }
+  .step .n {
+    flex: none; width: 34px; height: 34px; border-radius: 50%;
+    background: var(--green); color: #fff; font-weight: 700; font-size: 15px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .step h3 { font-size: 16.5px; margin-bottom: 4px; }
+  .step p { font-size: 14px; color: var(--sub); }
+
+  /* compare */
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th, td { padding: 12px 16px; text-align: left; border-bottom: 1px solid #F0F0F0; }
+  th { font-size: 13.5px; color: var(--sub); font-weight: 600; }
+  td.hl { color: var(--green-dark); font-weight: 700; }
+
+  footer {
+    margin-top: 72px; padding: 36px 24px 48px; border-top: 1px solid #F0F0F0;
+    text-align: center; color: var(--sub); font-size: 14px;
+  }
+  footer a { color: var(--green-dark); text-decoration: none; margin: 0 8px; }
+  footer a:hover { text-decoration: underline; }
+
+  @media (max-width: 720px) {
+    .hero h1 { font-size: 34px; }
+    .shots { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EyeCare20">
+    <path d="M4 32 C14 16 50 16 60 32 C50 48 14 48 4 32 Z" fill="#048A4A"/>
+    <circle cx="32" cy="32" r="9" fill="#FFFFFF"/>
+  </svg>
+  <h1>EyeCare20</h1>
+  <p class="tagline">每用眼 20 分钟，望远 20 秒 —— 68KB 的 Windows 护眼提醒小工具</p>
+  <p class="rule">望远休息 · 眨眼训练 · 久坐提醒 · 喝水提醒</p>
+  <div class="badges">
+    <span class="badge">68 KB 单文件</span>
+    <span class="badge">零依赖 · 免安装</span>
+    <span class="badge">Win 10 / 11</span>
+    <span class="badge">MIT 开源</span>
+  </div>
+  <div class="dl-box">
+    <a class="btn btn-primary" id="btn-gitee" href="https://gitee.com/songyun/EyeCare20/releases">国内下载 · Gitee</a>
+    <a class="btn btn-ghost" id="btn-github" href="https://github.com/chenbf0713/EyeCare20/releases">国际下载 · GitHub</a>
+  </div>
+  <p class="dl-hint" id="dl-hint">正在检测线路，为你推荐最快下载源…</p>
+</header>
+
+<!-- ===== Features ===== -->
+<section class="section">
+  <div class="wrap">
+    <h2>四类提醒，一个 68KB 的托盘小工具</h2>
+    <div class="grid">
+      <div class="card">
+        <span class="num">20-20-20</span>
+        <h3>望远休息</h3>
+        <p>每 20 分钟弹一张居中倒计时卡，引导看向 6 米外放松睫状肌。基于美国眼科学会推荐法则，Aston 大学研究验证有效。</p>
+      </div>
+      <div class="card">
+        <span class="num">眨眼训练</span>
+        <h3>闭眼 2 秒 · 完整眨眼 5 次</h3>
+        <p>屏幕专注时眨眼频率骤降一半，导致干眼。眼睛开合动画引导完整眨眼，重建泪膜。</p>
+      </div>
+      <div class="card">
+        <span class="num">久坐提醒</span>
+        <h3>起身活动身体</h3>
+        <p>默认每 60 分钟提醒站起来走动、伸展。久坐是独立的健康风险因素，定时打断是唯一解法。</p>
+      </div>
+      <div class="card">
+        <span class="num">喝水提醒</span>
+        <h3>按时补充水分</h3>
+        <p>专注时最容易忘记的就是喝水。默认每 45 分钟温和提醒一次。</p>
+      </div>
+      <div class="card">
+        <span class="num">智能合并</span>
+        <h3>相差 5 分钟内的提醒合并弹出</h3>
+        <p>到期时间接近的提醒自动合并为一张卡同时提醒；重排后任意两个提醒至少错开 5 分钟——不打扰流，也永不轰炸。</p>
+      </div>
+      <div class="card">
+        <span class="num">智能暂停</span>
+        <h3>休息中操作即冻结倒计时</h3>
+        <p>倒计时期间检测到键鼠操作或全屏应用（游戏/电影）→ 倒计时自动暂停；看视频、听歌不受影响。真正休息才算数。</p>
+      </div>
+      <div class="card">
+        <span class="num">数据统计</span>
+        <h3>今日摘要 + 7 天柱状图</h3>
+        <p>按日记录完成、跳过与休息时长，本地存储、绝不上传。让坚持看得见。</p>
+      </div>
+      <div class="card">
+        <span class="num">自动更新</span>
+        <h3>Gitee / GitHub 双源回退</h3>
+        <p>启动静默检查，一键完成下载→替换→重启（约 2 秒）。国内 Gitee 直连，国外 GitHub 回退，全球都能顺畅更新。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Screenshots ===== -->
+<section class="section" style="background:#FAFBFA;">
+  <div class="wrap">
+    <h2>界面一览</h2>
+    <div class="shots">
+      <figure>
+        <img src="screenshots/reminder-card.png" alt="望远休息提醒卡：屏幕居中，环形倒计时">
+        <figcaption>望远休息提醒卡 · 屏幕居中环形倒计时，操作中自动冻结</figcaption>
+      </figure>
+      <figure>
+        <img src="screenshots/main-form.png" alt="主界面：四类提醒剩余时间">
+        <figcaption>主界面 · 双击托盘打开，实时查看各提醒剩余时间</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Steps ===== -->
+<section class="section">
+  <div class="wrap">
+    <h2>三步开始</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="n">1</div>
+        <div><h3>下载单文件 exe</h3><p>从上方 Gitee 或 GitHub Releases 下载 <code>EyeCare20.exe</code>，仅 68KB，无需安装。</p></div>
+      </div>
+      <div class="step">
+        <div class="n">2</div>
+        <div><h3>双击运行</h3><p>绿色软件即刻驻留托盘。若 SmartScreen 提示：右键 exe → 属性 → 解除锁定。</p></div>
+      </div>
+      <div class="step">
+        <div class="n">3</div>
+        <div><h3>右键托盘 → 开机自启动</h3><p>一劳永逸。双击托盘图标随时查看剩余倒计时。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Compare ===== -->
+<section class="section" style="background:#FAFBFA;">
+  <div class="wrap">
+    <h2>和同类软件比</h2>
+    <table>
+      <tr><th></th><th>EyeCare20</th><th>Stretchly (Electron)</th><th>Project Eye</th></tr>
+      <tr><td>体积</td><td class="hl">68 KB</td><td>~300 MB</td><td>~20 MB</td></tr>
+      <tr><td>内存占用</td><td class="hl">~35 MB</td><td>~200 MB+</td><td>~80 MB</td></tr>
+      <tr><td>提醒合并/错峰</td><td class="hl">有</td><td>无</td><td>无</td></tr>
+      <tr><td>休息中操作暂停</td><td class="hl">有</td><td>无</td><td>无</td></tr>
+      <tr><td>国内更新源</td><td class="hl">Gitee 直连</td><td>—</td><td>—</td></tr>
+      <tr><td>开源协议</td><td class="hl">MIT</td><td>BSD</td><td>MIT</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ===== Donate ===== -->
+<section class="section">
+  <div class="wrap">
+    <h2>请作者喝杯咖啡 ☕</h2>
+    <p style="text-align:center; color:var(--sub); font-size:15px; max-width:560px; margin:0 auto 28px;">
+      EyeCare20 永久免费开源。如果它帮到了你，一杯咖啡就是最好的鼓励。
+    </p>
+    <div class="dl-box">
+      <a class="btn btn-primary" href="https://afdian.com/your-id" target="_blank">爱发电 · 支持作者</a>
+      <a class="btn btn-ghost" href="https://gitee.com/songyun/EyeCare20" target="_blank">点个 Star ✨</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <a href="https://gitee.com/songyun/EyeCare20">Gitee 仓库</a>·
+    <a href="https://github.com/chenbf0713/EyeCare20">GitHub 仓库</a>·
+    <a href="https://gitee.com/songyun/EyeCare20/releases">更新日志</a>
+  </div>
+  <p style="margin-top:14px;">EyeCare20 · MIT License · 健康辅助工具，不替代医疗建议</p>
+</footer>
+
+<script>
+// 线路探测：尝试加载 Gitee 小图标，成功则推荐 Gitee，超时/失败推荐 GitHub
+(function () {
+  var hint = document.getElementById('dl-hint');
+  var gitee = document.getElementById('btn-gitee');
+  var github = document.getElementById('btn-github');
+  var img = new Image();
+  var done = false;
+  var timer = setTimeout(function () { settle(false); }, 3000);
+  function settle(ok) {
+    if (done) return; done = true; clearTimeout(timer);
+    if (ok) {
+      hint.innerHTML = '已检测到国内线路，推荐从 <b>Gitee</b> 下载（最快）';
+    } else {
+      hint.innerHTML = '建议从 <b>GitHub</b> 下载（或试试 Gitee）';
+      github.classList.remove('btn-ghost'); github.classList.add('btn-primary');
+      gitee.classList.add('btn-ghost'); gitee.classList.remove('btn-primary');
+    }
+  }
+  img.onload = function () { settle(true); };
+  img.onerror = function () { settle(false); };
+  img.src = 'https://gitee.com/favicon.ico?_t=' + Date.now();
+})();
+</script>
+</body>
+</html>

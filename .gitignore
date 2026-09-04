@@ -1,0 +1,22 @@
+# build output
+bin/
+obj/
+
+# user files
+*.user
+*.suo
+*.bak
+
+# test artifacts
+test-*.ps1
+serve.ps1
+capture-shots.ps1
+barrier.*
+*.log
+
+# release packages (上传到 Releases，不入库)
+*.zip
+dist/
+
+# 作者专用工具与密钥（勿公开）
+tools/keygen.html

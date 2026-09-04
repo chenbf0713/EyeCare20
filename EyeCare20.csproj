@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <OutputType>WinExe</OutputType>
+    <AssemblyName>EyeCare20</AssemblyName>
+    <RootNamespace>EyeCare20</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>EyeCare20.ico</ApplicationIcon>
+    <LangVersion>5</LangVersion>
+    <Prefer32Bit>false</Prefer32Bit>
+    <AssemblyTitle>EyeCare20 护眼提醒</AssemblyTitle>
+    <Product>EyeCare20</Product>
+    <Description>20-20-20 护眼提醒小工具</Description>
+    <Version>1.3.1.0</Version>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+  </ItemGroup>
+
+</Project>
