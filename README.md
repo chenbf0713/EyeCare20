@@ -147,6 +147,10 @@ EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕
 
 > 提示：这是健康辅助工具，不能替代医疗建议。持续眼不适请就医。
 
+### 反馈
+
+发现 Bug 或有功能建议？欢迎提 Issue，或邮件至 **<chenbf0713@163.com>**。
+
 ### 常见问题
 
 **Q：护眼软件哪个好？EyeCare20 适合什么人？**
@@ -299,6 +303,10 @@ EyeCare20 is free and open source. If it helped you, consider buying the author 
 [MIT](LICENSE) — free to use, modify, and distribute.
 
 > Note: This is a health aid tool, not a substitute for medical advice. See a doctor for persistent eye discomfort.
+
+### Feedback
+
+Found a bug or have a feature suggestion? Open an Issue, or email **<chenbf0713@163.com>**.
 
 ### FAQ
 
