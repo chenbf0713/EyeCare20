@@ -16,31 +16,22 @@
 长时间盯屏幕带来的眼干、眼疲劳、久坐和缺水，靠意志力提醒自己没用——让软件替你记得。
 基于医学推荐的 **20-20-20 法则**（每 20 分钟，看 20 英尺≈6 米外，持续 20 秒）与眨眼训练设计。
 
-它有多小？**不到 100KB 的单文件 exe**（不到同类 Electron 方案的千分之一），不做任何事时仅占用约 35MB 内存，
-不联网、不上传、无任何依赖——Windows 10/11 预装运行时，下载即用。
-
-| <br />    | EyeCare20    | Stretchly    | Project Eye |
-| --------- | ------------ | ------------ | ----------- |
-| 体积        | **极小**       | \~300 MB     | \~20 MB     |
-| 内存占用      | \~35 MB      | \~200 MB+    | \~80 MB     |
-| 依赖        | 无            | Electron 运行时 | .NET        |
-| 提醒合并/错峰   | **有**        | 无            | 无           |
-| 休息中操作自动暂停 | **有**        | 无            | 无           |
-| 国内更新源     | **Gitee 直连** | -            | -           |
+它有多小？**一个不到 100KB 的单文件 exe**，不做任何事时仅占用约 35MB 内存，
+不联网、无任何依赖——Windows 10/11 预装运行时，下载即用。
 
 ## 功能特性
 
 - **四类健康提醒统一管理**：望远休息（20-20-20）、眨眼训练（闭眼 2 秒 + 完整眨眼 5 次）、久坐提醒、喝水提醒——每类可独立开关/设间隔
 
-- **智能合并与错峰**：到期时间相差 5 分钟内的提醒自动合并为一张卡片同时弹出；重排后任意两个提醒至少相差 5 分钟，永不打扰流
+- **智能合并与错峰**：到期时间相差 5 分钟内的提醒自动合并为一张卡片同时弹出；重排后任意两个提醒至少相差 5 分钟，减少打扰
 
 - **休息中智能暂停**：休息倒计时期间检测到键鼠操作或全屏应用（游戏/电影）→ 倒计时自动冻结，真正停下来才继续；看视频/听歌不受影响
 
 - **双模式计时**：简单模式按系统时间循环；高级模式仅在操作电脑（键鼠/音频输出）时累计时长
 
-- **数据统计**：按日记录完成/跳过/休息时长，今日摘要 + 最近 7 天柱状图
+- **数据统计**：按日记录完成/跳过/休息时长，今日摘要 + 最近 7 天柱状图，本地存储
 
-- **全自动更新**：内置 Gitee/GitHub 双源回退（国内 Gitee 优先，国外 GitHub 回退），一键完成下载→替换→重启
+- **自动更新**：内置 Gitee/GitHub 双源回退（国内 Gitee 优先，国外 GitHub 回退），一键完成下载→替换→重启
 
 - **清爽界面**：屏幕居中提醒卡、环形倒计时、矢量自绘图标（零图片资源）、主色 `#048A4A` 极简风格
 
@@ -60,9 +51,9 @@
 
    - **国际用户（GitHub）**：[Releases 下载](https://github.com/chenbf0713/EyeCare20/releases)
 2. 双击运行即可（首次运行若被 SmartScreen 提示：右键 exe → 属性 → 勾选"解除锁定"）
-3. 托盘右键 → **开机自启动**，一劳永逸
+3. 托盘右键 → **开机自启动**，一次设置长期有效
 
-> 配置与统计数据保存在 `%APPDATA%\EyeCare20\`，升级或换机不会丢失。
+> 配置与统计数据保存在 `%APPDATA%\EyeCare20\`，本地存储，升级或换机不会丢失。
 
 ## 使用说明
 
@@ -141,25 +132,25 @@ EyeCare20/
 
 ## 科学依据
 
-- [20-20-20 法则](https://lookaway.com/20-20-20-rule/)：美国眼科学会/美国验光协会推荐的数字眼疲劳缓解方式，Aston 大学 2022 年研究首次严格验证其有效性（[研究摘要](https://pubmed.ncbi.nlm.nih.gov/35963776/)）
+- [20-20-20 法则](https://lookaway.com/20-20-20-rule/)：美国眼科学会推荐的数字眼疲劳缓解方式，Aston 大学 2022 年研究曾对其进行严格验证（[研究摘要](https://pubmed.ncbi.nlm.nih.gov/35963776/)）
 
-- 眨眼训练：屏幕专注时眨眼频率从每分钟 15–20 次降至 5–7 次，刻意完整眨眼是国际干眼管理报告（TFOS DEWS II/III）推荐的标准行为疗法
+- 眨眼训练：屏幕专注时眨眼频率会明显下降，刻意完整眨眼是干眼管理的常见行为疗法
 
-- 久坐与定时补水：世卫组织等机构建议的日常健康习惯
+- 久坐与定时补水：日常健康习惯的常见建议
 
 ## English
 
-**EyeCare20** is a tiny, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, and fully automatic dual-source (Gitee/GitHub) self-updating. Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11). [Download from Releases](https://github.com/chenbf0713/EyeCare20/releases) · 中文说明见上文。
+**EyeCare20** is a tiny, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, and dual-source (Gitee/GitHub) self-updating. Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11). [Download from Releases](https://github.com/chenbf0713/EyeCare20/releases) · 中文说明见上文.
 
 ## 路线图
 
-**核心提醒功能永久免费**，无功能墙、无提醒次数限制。当前已实现：
+**核心提醒功能免费**，无功能墙、无提醒次数限制。当前已实现：
 
 - 📊 **今日报告**：当日完成/跳过/休息时长摘要 + 最近 7 天柱状图
 
 ## 请作者喝杯咖啡
 
-EyeCare20 会永久免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕：
+EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕：
 
 - **爱发电**：[afdian.com/your-id](https://afdian.com/your-id)（推荐，支持一次性与月度）
 
@@ -177,3 +168,23 @@ EyeCare20 会永久免费开源。如果它帮到了你，欢迎请作者喝杯�
 
 > 提示：这是健康辅助工具，不能替代医疗建议。持续眼不适请就医。
 
+## 常见问题
+
+**Q：护眼软件哪个好？EyeCare20 适合什么人？**
+适合长时间使用电脑的办公族、程序员、学生，需要定时望远休息、眨眼训练、久坐和喝水提醒的 Windows 用户。软件体积小、零依赖，适合追求轻量绿色工具的用户。
+
+**Q：20-20-20 法则是什么？**
+每使用屏幕 20 分钟，看向 20 英尺（约 6 米）外的物体 20 秒，是缓解数字眼疲劳的常见建议。
+
+**Q：EyeCare20 联网吗？会上传用户数据吗？**
+软件本身不联网、不上传数据，所有配置和统计本地存储在 `%APPDATA%\EyeCare20\`。仅在检查更新时访问 Gitee/GitHub 的 update.json 与发行版附件。
+
+**Q：护眼提醒、久坐提醒、喝水提醒可以同时开吗？**
+可以。四类提醒可独立开关与设间隔，智能合并与错峰机制避免同时打扰。
+
+**Q：Windows 没有安装 .NET Framework 能用吗？**
+Windows 10/11 已预装 .NET Framework 4.8，下载即用。更旧的 Windows 7/8 需手动安装运行时。
+
+## 关键词
+
+护眼软件 · 眼疲劳提醒 · 20-20-20 法则 · 久坐提醒 · 喝水提醒 · 眨眼训练 · 干眼症预防 · Windows 桌面提醒工具 · 绿色单文件 · 开源护眼软件 · 数字眼疲劳 · 视力保护
