@@ -147,6 +147,18 @@ EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕
 
 > 提示：这是健康辅助工具，不能替代医疗建议。持续眼不适请就医。
 
+### 杀毒软件误报说明
+
+软件未购买代码签名证书（开源个人项目），部分杀毒软件（如 360 安全卫士）可能基于启发式扫描误报为木马。**本软件完全开源，可在 [GitHub](https://github.com/chenbf0713/EyeCare20) / [Gitee](https://gitee.com/songyun/EyeCare20) 审计源码，无任何恶意行为。**
+
+若遇到误报，可手动添加到信任区：
+
+- **360 安全卫士**：主界面 → 木马查杀 → 信任区 → 添加文件 → 选择 `EyeCare20.exe`
+- **火绒安全**：防护中心 → 信任区 → 添加 → 选择 `EyeCare20.exe`
+- **Windows Defender**：Windows 安全中心 → 病毒和威胁防护 → 管理设置 → 排除项 → 添加 `EyeCare20.exe`
+
+作者已向 360、微软等厂商提交误报申诉，待审核通过后自动加白。
+
 ### 反馈
 
 发现 Bug 或有功能建议？欢迎提 Issue，或邮件至 **<chenbf0713@163.com>**。
@@ -303,6 +315,18 @@ EyeCare20 is free and open source. If it helped you, consider buying the author 
 [MIT](LICENSE) — free to use, modify, and distribute.
 
 > Note: This is a health aid tool, not a substitute for medical advice. See a doctor for persistent eye discomfort.
+
+### Antivirus False Positives
+
+This software does not purchase a code signing certificate (open-source personal project). Some antivirus software (e.g., 360 Total Security) may flag it as a trojan based on heuristic scanning. **The software is fully open-source and auditable at [GitHub](https://github.com/chenbf0713/EyeCare20) / [Gitee](https://gitee.com/songyun/EyeCare20), with no malicious behavior.**
+
+If you encounter false positives, manually add it to the trust zone:
+
+- **360 Total Security**: Main UI → Trojan Scan → Trust Zone → Add File → select `EyeCare20.exe`
+- **Huorong Security**: Protection Center → Trust Zone → Add → select `EyeCare20.exe`
+- **Windows Defender**: Windows Security → Virus & threat protection → Manage settings → Exclusions → Add `EyeCare20.exe`
+
+The author has submitted false positive appeals to 360, Microsoft, etc. Automatic whitelisting will take effect after approval.
 
 ### Feedback
 
