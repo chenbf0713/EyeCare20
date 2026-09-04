@@ -49,7 +49,7 @@ namespace EyeCare20
             Controls.Add(_panel);
 
             Button restBtn = new Button();
-            restBtn.Text = "立即望远休息";
+            restBtn.Text = I18n.T("立即望远休息");
             restBtn.FlatStyle = FlatStyle.Flat;
             restBtn.FlatAppearance.BorderColor = Accent;
             restBtn.ForeColor = Color.White;
@@ -69,7 +69,7 @@ namespace EyeCare20
             restBtn.BringToFront();
 
             Label hint = new Label();
-            hint.Text = "卡片关闭后才开始下一个周期";
+            hint.Text = I18n.T("卡片关闭后才开始下一个周期");
             hint.Font = new Font("Microsoft YaHei UI", 8.25F);
             hint.ForeColor = Color.FromArgb(150, 150, 150);
             hint.AutoSize = true;
@@ -109,7 +109,10 @@ namespace EyeCare20
             {
                 ReminderKind.Look, ReminderKind.Blink, ReminderKind.Sit, ReminderKind.Water
             };
-            private static readonly string[] Names = { "望远休息", "眨眼训练", "久坐提醒", "喝水提醒" };
+            private static string[] GetNames()
+            {
+                return new string[] { I18n.T("望远休息"), I18n.T("眨眼训练"), I18n.T("久坐提醒"), I18n.T("喝水提醒") };
+            }
             private static readonly ReminderIconKind[] Icons =
             {
                 ReminderIconKind.Eye, ReminderIconKind.Eye,
@@ -142,8 +145,8 @@ namespace EyeCare20
                 }
                 bool paused = _owner._isPaused();
                 string modeText = paused
-                    ? "已暂停"
-                    : (_owner._config.IsAdvanced ? "高级模式 · 仅使用电脑时计时" : "简单模式 · 按系统时间循环");
+                    ? I18n.T("已暂停")
+                    : (_owner._config.IsAdvanced ? I18n.T("高级模式 · 仅使用电脑时计时") : I18n.T("简单模式 · 按系统时间循环"));
                 using (Font modeFont = new Font("Microsoft YaHei UI", 8.75F))
                 using (SolidBrush mb = new SolidBrush(paused ? WarnColor : TextSub))
                 {
@@ -151,6 +154,7 @@ namespace EyeCare20
                 }
 
                 ReminderKind[] active = _owner._getActiveKinds() ?? new ReminderKind[0];
+                string[] names = GetNames();
 
                 for (int i = 0; i < Kinds.Length; i++)
                 {
@@ -162,7 +166,7 @@ namespace EyeCare20
                     using (Font nameFont = new Font("Microsoft YaHei UI", 11.5F, FontStyle.Bold))
                     using (SolidBrush nb = new SolidBrush(remaining < 0 ? TextOff : TextMain))
                     {
-                        g.DrawString(Names[i], nameFont, nb, 68, y + 4);
+                        g.DrawString(names[i], nameFont, nb, 68, y + 4);
                     }
 
                     bool isActive = Array.IndexOf(active, Kinds[i]) >= 0;
@@ -170,22 +174,22 @@ namespace EyeCare20
                     Color statusColor;
                     if (remaining < 0)
                     {
-                        status = "已关闭";
+                        status = I18n.T("已关闭");
                         statusColor = TextOff;
                     }
                     else if (isActive)
                     {
-                        status = "提醒中…";
+                        status = I18n.T("提醒中…");
                         statusColor = Accent;
                     }
                     else if (paused)
                     {
-                        status = "已暂停";
+                        status = I18n.T("已暂停");
                         statusColor = TextOff;
                     }
                     else
                     {
-                        status = FormatRemaining(remaining) + " 后提醒";
+                        status = I18n.RemainingSuffix(FormatRemaining(remaining));
                         statusColor = TextSub;
                     }
                     using (Font stFont = new Font("Microsoft YaHei UI", 10.5F, FontStyle.Bold))

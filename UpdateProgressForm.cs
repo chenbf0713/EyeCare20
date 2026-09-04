@@ -26,7 +26,7 @@ namespace EyeCare20
             _onInstallReady = onInstallReady;
             _sync = SynchronizationContext.Current;
 
-            Text = "正在更新";
+            Text = I18n.T("正在更新");
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -36,7 +36,7 @@ namespace EyeCare20
             ClientSize = new Size(380, 168);
 
             Label title = new Label();
-            title.Text = "正在更新到 v" + info.Version;
+            title.Text = I18n.T("正在更新到 v") + info.Version;
             title.Font = new Font("Microsoft YaHei UI", 13F, FontStyle.Bold);
             title.ForeColor = Accent;
             title.AutoSize = true;
@@ -44,7 +44,7 @@ namespace EyeCare20
             Controls.Add(title);
 
             _lblStatus = new Label();
-            _lblStatus.Text = "正在下载…";
+            _lblStatus.Text = I18n.T("正在下载…");
             _lblStatus.ForeColor = Color.FromArgb(60, 60, 60);
             _lblStatus.AutoSize = true;
             _lblStatus.Location = new Point(26, 58);
@@ -63,7 +63,7 @@ namespace EyeCare20
             Controls.Add(_lblDetail);
 
             Label hint = new Label();
-            hint.Text = "下载完成后软件将自动重启";
+            hint.Text = I18n.T("下载完成后软件将自动重启");
             hint.Font = new Font("Microsoft YaHei UI", 8.5F);
             hint.ForeColor = Color.FromArgb(150, 150, 150);
             hint.AutoSize = true;
@@ -71,7 +71,7 @@ namespace EyeCare20
             Controls.Add(hint);
 
             Button cancel = new Button();
-            cancel.Text = "取消";
+            cancel.Text = I18n.T("取消");
             cancel.FlatStyle = FlatStyle.Flat;
             cancel.FlatAppearance.BorderColor = Color.FromArgb(210, 210, 210);
             cancel.ForeColor = Color.FromArgb(90, 90, 90);
@@ -102,7 +102,7 @@ namespace EyeCare20
                     {
                         return;
                     }
-                    Post(delegate(object s2) { _lblStatus.Text = "正在解包…"; }, null);
+                    Post(delegate(object s2) { _lblStatus.Text = I18n.T("正在解包…"); }, null);
 
                     string newExe = UpdateInstaller.PrepareNewExe(downloaded);
                     if (_cancelled)
@@ -110,16 +110,16 @@ namespace EyeCare20
                         return;
                     }
 
-                    Post(delegate(object s2) { _lblStatus.Text = "正在安装…"; }, null);
+                    Post(delegate(object s2) { _lblStatus.Text = I18n.T("正在安装…"); }, null);
                     bool ok = UpdateInstaller.LaunchReplaceScript(newExe, System.Diagnostics.Process.GetCurrentProcess().Id);
                     if (!ok)
                     {
-                        throw new Exception("启动替换脚本失败，请手动更新");
+                        throw new Exception(I18n.T("启动替换脚本失败，请手动更新"));
                     }
 
                     Post(delegate(object s2)
                     {
-                        _lblStatus.Text = "更新完成，正在重启…";
+                        _lblStatus.Text = I18n.T("更新完成，正在重启…");
                         // 稍候片刻让用户看到状态，再请求宿主退出
                         System.Windows.Forms.Timer t = new System.Windows.Forms.Timer();
                         t.Interval = 800;
@@ -143,7 +143,7 @@ namespace EyeCare20
                     Log.WriteError("auto-update", ex);
                     Post(delegate(object s2)
                     {
-                        MessageBox.Show("更新失败：" + ex.Message, "EyeCare20",
+                        MessageBox.Show(I18n.T("更新失败：") + ex.Message, "EyeCare20",
                             MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         Close();
                     }, null);

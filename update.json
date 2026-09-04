@@ -1,6 +1,6 @@
 {
-  "version": "1.3.1.0",
-  "downloadUrl": "https://gitee.com/songyun/eyecare20/releases/download/v1.3.1/EyeCare20.exe",
-  "downloadUrlAlt": "https://github.com/chenbf0713/EyeCare20/releases/download/v1.3.1/EyeCare20.exe",
-  "notes": "新增：Gitee/GitHub 双源自动更新。国内 Gitee 优先，国外 GitHub 回退。"
+  "version": "1.3.2.0",
+  "downloadUrl": "https://gitee.com/songyun/eyecare20/releases/download/v1.3.2/EyeCare20.exe",
+  "downloadUrlAlt": "https://github.com/chenbf0713/EyeCare20/releases/download/v1.3.2/EyeCare20.exe",
+  "notes": "新增：多语言支持（中英文自动切换 + 设置手动切换）。优化：下载按钮文案简化。"
 }

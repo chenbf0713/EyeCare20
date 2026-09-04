@@ -32,24 +32,25 @@ namespace EyeCare20
         private readonly TextBox _txtLicense;
         private readonly Button _btnActivate;
         private readonly Label _lblLicenseState;
+        private readonly ComboBox _cmbLang;
 
         public SettingsForm(AppConfig config)
         {
             _config = config;
 
-            Text = "EyeCare20 设置";
+            Text = I18n.T("EyeCare20 设置");
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
             ShowInTaskbar = false;
             BackColor = Color.White;
             Font = new Font("Microsoft YaHei UI", 9.5F);
-            ClientSize = new Size(420, 646);
+            ClientSize = new Size(420, 696);
 
             Color accent = Color.FromArgb(4, 138, 74);
 
             Label title = new Label();
-            title.Text = "设置";
+            title.Text = I18n.T("设置");
             title.Font = new Font("Microsoft YaHei UI", 14F, FontStyle.Bold);
             title.ForeColor = Color.FromArgb(26, 26, 26);
             title.AutoSize = true;
@@ -58,20 +59,20 @@ namespace EyeCare20
 
             // ---- 计时模式 ----
             GroupBox gMode = new GroupBox();
-            gMode.Text = " 计时模式 ";
+            gMode.Text = I18n.T(" 计时模式 ");
             gMode.ForeColor = accent;
             gMode.Bounds = new Rectangle(24, 54, 372, 106);
             Controls.Add(gMode);
 
             _rbSimple = new RadioButton();
-            _rbSimple.Text = "简单模式 · 按系统时间固定循环";
+            _rbSimple.Text = I18n.T("简单模式 · 按系统时间固定循环");
             _rbSimple.AutoSize = true;
             _rbSimple.Location = new Point(16, 28);
             _rbSimple.Checked = !_config.IsAdvanced;
             gMode.Controls.Add(_rbSimple);
 
             _rbAdvanced = new RadioButton();
-            _rbAdvanced.Text = "高级模式 · 仅操作电脑或播放音频时计时";
+            _rbAdvanced.Text = I18n.T("高级模式 · 仅操作电脑或播放音频时计时");
             _rbAdvanced.AutoSize = true;
             _rbAdvanced.Location = new Point(16, 60);
             _rbAdvanced.Checked = _config.IsAdvanced;
@@ -79,26 +80,26 @@ namespace EyeCare20
 
             // ---- 提醒项（四类统一） ----
             GroupBox gItems = new GroupBox();
-            gItems.Text = " 提醒项 ";
+            gItems.Text = I18n.T(" 提醒项 ");
             gItems.ForeColor = accent;
             gItems.Bounds = new Rectangle(24, 176, 372, 192);
             Controls.Add(gItems);
 
-            _chkLook = AddItemRow(gItems, "望远休息", 0, _config.LookIntervalMinutes, 1, out _numLookInterval);
+            _chkLook = AddItemRow(gItems, I18n.T("望远休息"), 0, _config.LookIntervalMinutes, 1, out _numLookInterval);
             _chkLook.Checked = _config.LookEnabled;
 
-            _chkBlink = AddItemRow(gItems, "眨眼训练", 1, _config.BlinkIntervalMinutes, 1, out _numBlinkInterval);
+            _chkBlink = AddItemRow(gItems, I18n.T("眨眼训练"), 1, _config.BlinkIntervalMinutes, 1, out _numBlinkInterval);
             _chkBlink.Checked = _config.BlinkEnabled;
 
-            _chkSit = AddItemRow(gItems, "久坐提醒", 2, _config.SitIntervalMinutes, 1, out _numSitInterval);
+            _chkSit = AddItemRow(gItems, I18n.T("久坐提醒"), 2, _config.SitIntervalMinutes, 1, out _numSitInterval);
             _chkSit.Checked = _config.SitEnabled;
 
-            _chkWater = AddItemRow(gItems, "喝水提醒", 3, _config.WaterIntervalMinutes, 1, out _numWaterInterval);
+            _chkWater = AddItemRow(gItems, I18n.T("喝水提醒"), 3, _config.WaterIntervalMinutes, 1, out _numWaterInterval);
             _chkWater.Checked = _config.WaterEnabled;
 
             // 望远行附加：休息时长
             Label durLab = new Label();
-            durLab.Text = "时长";
+            durLab.Text = I18n.T("时长");
             durLab.AutoSize = true;
             durLab.Location = new Point(252, 29);
             gItems.Controls.Add(durLab);
@@ -112,13 +113,13 @@ namespace EyeCare20
             gItems.Controls.Add(_numLookDuration);
 
             Label secLab = new Label();
-            secLab.Text = "秒";
+            secLab.Text = I18n.T("秒");
             secLab.AutoSize = true;
             secLab.Location = new Point(346, 29);
             gItems.Controls.Add(secLab);
 
             Label hint = new Label();
-            hint.Text = "到期弹出提醒卡片，卡片关闭后才开始该提醒的下一个周期";
+            hint.Text = I18n.T("到期弹出提醒卡片，卡片关闭后才开始该提醒的下一个周期");
             hint.Font = new Font("Microsoft YaHei UI", 8F);
             hint.ForeColor = Color.FromArgb(150, 150, 150);
             hint.AutoSize = true;
@@ -127,28 +128,44 @@ namespace EyeCare20
 
             // ---- 其他 ----
             _chkSound = new CheckBox();
-            _chkSound.Text = "提醒时播放提示音";
+            _chkSound.Text = I18n.T("提醒时播放提示音");
             _chkSound.AutoSize = true;
             _chkSound.Location = new Point(28, 382);
             _chkSound.Checked = _config.SoundEnabled;
             Controls.Add(_chkSound);
 
             _chkAutoStart = new CheckBox();
-            _chkAutoStart.Text = "开机自动启动";
+            _chkAutoStart.Text = I18n.T("开机自动启动");
             _chkAutoStart.AutoSize = true;
             _chkAutoStart.Location = new Point(28, 414);
             _chkAutoStart.Checked = _config.AutoStart;
             Controls.Add(_chkAutoStart);
 
+            // ---- 语言 ----
+            GroupBox gLang = new GroupBox();
+            gLang.Text = I18n.T(" 语言 ");
+            gLang.ForeColor = accent;
+            gLang.Bounds = new Rectangle(24, 446, 372, 56);
+            Controls.Add(gLang);
+
+            _cmbLang = new ComboBox();
+            _cmbLang.DropDownStyle = ComboBoxStyle.DropDownList;
+            _cmbLang.Location = new Point(16, 22);
+            _cmbLang.Width = 180;
+            _cmbLang.Items.AddRange(new object[] { I18n.T("自动（跟随系统）"), I18n.T("中文"), "English" });
+            _cmbLang.SelectedIndex = SelectLangIndex(_config.Language);
+            _cmbLang.SelectedIndexChanged += OnLangChanged;
+            gLang.Controls.Add(_cmbLang);
+
             // ---- 检查更新 ----
             GroupBox gUpdate = new GroupBox();
-            gUpdate.Text = " 检查更新 ";
+            gUpdate.Text = I18n.T(" 检查更新 ");
             gUpdate.ForeColor = accent;
-            gUpdate.Bounds = new Rectangle(24, 446, 372, 60);
+            gUpdate.Bounds = new Rectangle(24, 512, 372, 60);
             Controls.Add(gUpdate);
 
             _chkAutoUpdate = new CheckBox();
-            _chkAutoUpdate.Text = "启动时自动检查更新";
+            _chkAutoUpdate.Text = I18n.T("启动时自动检查更新");
             _chkAutoUpdate.AutoSize = true;
             _chkAutoUpdate.Location = new Point(16, 26);
             _chkAutoUpdate.Checked = _config.AutoCheckUpdate;
@@ -156,13 +173,13 @@ namespace EyeCare20
 
             // ---- Pro 激活 ----
             GroupBox gPro = new GroupBox();
-            gPro.Text = " Pro ";
+            gPro.Text = I18n.T(" Pro ");
             gPro.ForeColor = accent;
-            gPro.Bounds = new Rectangle(24, 516, 372, 92);
+            gPro.Bounds = new Rectangle(24, 582, 372, 92);
             Controls.Add(gPro);
 
             _lblLicenseState = new Label();
-            _lblLicenseState.Text = LicenseStore.IsPro ? "已激活 Pro ✓ 感谢支持！" : "免费版";
+            _lblLicenseState.Text = LicenseStore.IsPro ? I18n.T("已激活 Pro ✓ 感谢支持！") : I18n.T("免费版");
             _lblLicenseState.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
             _lblLicenseState.ForeColor = LicenseStore.IsPro ? accent : Color.FromArgb(140, 140, 140);
             _lblLicenseState.AutoSize = true;
@@ -180,7 +197,7 @@ namespace EyeCare20
                 gPro.Controls.Add(_txtLicense);
 
                 _btnActivate = new Button();
-                _btnActivate.Text = "激活";
+                _btnActivate.Text = I18n.T("激活");
                 _btnActivate.FlatStyle = FlatStyle.Flat;
                 _btnActivate.FlatAppearance.BorderColor = accent;
                 _btnActivate.ForeColor = accent;
@@ -191,11 +208,11 @@ namespace EyeCare20
             }
 
             Label status = new Label();
-            status.Text = "改动即时生效并自动保存";
+            status.Text = I18n.T("改动即时生效并自动保存");
             status.Font = new Font("Microsoft YaHei UI", 8.75F);
             status.ForeColor = Color.FromArgb(140, 140, 140);
             status.AutoSize = true;
-            status.Location = new Point(26, 616);
+            status.Location = new Point(26, 682);
             Controls.Add(status);
 
             // ---- 事件（初始化完成后才挂接，避免误触发）----
@@ -230,7 +247,7 @@ namespace EyeCare20
             parent.Controls.Add(chk);
 
             Label lab = new Label();
-            lab.Text = "间隔";
+            lab.Text = I18n.T("间隔");
             lab.AutoSize = true;
             lab.Location = new Point(118, y + 3);
             parent.Controls.Add(lab);
@@ -244,12 +261,43 @@ namespace EyeCare20
             parent.Controls.Add(num);
 
             Label unit = new Label();
-            unit.Text = "分钟";
+            unit.Text = I18n.T("分钟");
             unit.AutoSize = true;
             unit.Location = new Point(212, y + 3);
             parent.Controls.Add(unit);
 
             return chk;
+        }
+
+        /// <summary>配置值 → ComboBox 索引："" → 0(自动), "zh" → 1, "en" → 2。</summary>
+        private static int SelectLangIndex(string lang)
+        {
+            switch (lang)
+            {
+                case "zh": return 1;
+                case "en": return 2;
+                default: return 0;
+            }
+        }
+
+        /// <summary>语言切换：保存配置并提示重启生效。避免初始化期间误触发。</summary>
+        private void OnLangChanged(object sender, EventArgs e)
+        {
+            if (_loading)
+            {
+                return;
+            }
+            string newLang;
+            switch (_cmbLang.SelectedIndex)
+            {
+                case 1: newLang = "zh"; break;
+                case 2: newLang = "en"; break;
+                default: newLang = ""; break;
+            }
+            _config.Language = newLang;
+            ConfigStore.Save(_config);
+            MessageBox.Show(I18n.T("语言设置将在重启后生效。"), "EyeCare20",
+                MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void OnActivateClick(object sender, EventArgs e)
@@ -261,13 +309,13 @@ namespace EyeCare20
             string code = _txtLicense.Text.Trim();
             if (LicenseStore.Activate(code))
             {
-                MessageBox.Show("激活成功，感谢支持！", "EyeCare20",
+                MessageBox.Show(I18n.T("激活成功，感谢支持！"), "EyeCare20",
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Close();   // 重新打开设置页即显示 Pro 状态
             }
             else
             {
-                MessageBox.Show("激活码无效，请检查后重试。", "EyeCare20",
+                MessageBox.Show(I18n.T("激活码无效，请检查后重试。"), "EyeCare20",
                     MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }

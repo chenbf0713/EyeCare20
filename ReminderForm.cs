@@ -217,7 +217,7 @@ namespace EyeCare20
                 VectorIcons.Draw(g, _items[i].Icon, x, 30, iconSize, Accent);
                 x += iconSize + gap;
             }
-            DrawCenteredText(g, "同时提醒", MergedTitleFont, TextMain, 60);
+            DrawCenteredText(g, I18n.T("同时提醒"), MergedTitleFont, TextMain, 60);
 
             string names = _items[0].Title;
             for (int i = 1; i < _items.Length; i++)

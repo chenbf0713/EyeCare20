@@ -122,7 +122,7 @@ namespace EyeCare20
 
         public UpdateNoticeForm(UpdateInfo info)
         {
-            Text = "发现新版本";
+            Text = I18n.T("发现新版本");
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -132,7 +132,7 @@ namespace EyeCare20
             ClientSize = new Size(380, 210);
 
             Label title = new Label();
-            title.Text = "发现新版本 v" + info.Version;
+            title.Text = I18n.T("发现新版本 v") + info.Version;
             title.Font = new Font("Microsoft YaHei UI", 13F, FontStyle.Bold);
             title.ForeColor = Color.FromArgb(4, 138, 74);
             title.AutoSize = true;
@@ -140,21 +140,21 @@ namespace EyeCare20
             Controls.Add(title);
 
             Label current = new Label();
-            current.Text = "当前版本 v" + UpdateChecker.CurrentVersion().ToString();
+            current.Text = I18n.T("当前版本 v") + UpdateChecker.CurrentVersion().ToString();
             current.ForeColor = Color.FromArgb(140, 140, 140);
             current.AutoSize = true;
             current.Location = new Point(26, 52);
             Controls.Add(current);
 
             Label notes = new Label();
-            notes.Text = string.IsNullOrWhiteSpace(info.Notes) ? "（暂无更新说明）" : info.Notes;
+            notes.Text = string.IsNullOrWhiteSpace(info.Notes) ? I18n.T("（暂无更新说明）") : info.Notes;
             notes.ForeColor = Color.FromArgb(60, 60, 60);
             notes.Location = new Point(26, 80);
             notes.Size = new Size(330, 56);
             Controls.Add(notes);
 
             Button install = new Button();
-            install.Text = "立即更新";
+            install.Text = I18n.T("立即更新");
             install.FlatStyle = FlatStyle.Flat;
             install.FlatAppearance.BorderColor = Color.FromArgb(4, 138, 74);
             install.ForeColor = Color.White;
@@ -174,7 +174,7 @@ namespace EyeCare20
             Controls.Add(install);
 
             Button later = new Button();
-            later.Text = "以后再说";
+            later.Text = I18n.T("以后再说");
             later.FlatStyle = FlatStyle.Flat;
             later.FlatAppearance.BorderColor = Color.FromArgb(210, 210, 210);
             later.ForeColor = Color.FromArgb(90, 90, 90);

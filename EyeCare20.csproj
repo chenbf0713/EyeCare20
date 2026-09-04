@@ -12,7 +12,7 @@
     <AssemblyTitle>EyeCare20 护眼提醒</AssemblyTitle>
     <Product>EyeCare20</Product>
     <Description>20-20-20 护眼提醒小工具</Description>
-    <Version>1.3.1.0</Version>
+    <Version>1.3.2.0</Version>
   </PropertyGroup>
 
   <ItemGroup>

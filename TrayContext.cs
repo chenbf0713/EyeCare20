@@ -40,9 +40,11 @@ namespace EyeCare20
 
             _config = ConfigStore.Load();
             LicenseStore.Load();
+            I18n.Init(_config.Language);
             Log.Write("config loaded mode=" + _config.TimerMode
                 + " lookInterval=" + _config.LookIntervalMinutes
-                + " lookDuration=" + _config.LookDurationSeconds);
+                + " lookDuration=" + _config.LookDurationSeconds
+                + " lang=" + I18n.Lang);
             if (_config.AutoStart)
             {
                 AutoStart.SetEnabled(true);
@@ -50,30 +52,30 @@ namespace EyeCare20
 
             _activity = new ActivityMonitor();
 
-            _miPause = new ToolStripMenuItem("暂停 1 小时");
+            _miPause = new ToolStripMenuItem(I18n.T("暂停 1 小时"));
             _miPause.Click += OnPauseClick;
 
-            _miAutoStart = new ToolStripMenuItem("开机自启动");
+            _miAutoStart = new ToolStripMenuItem(I18n.T("开机自启动"));
             _miAutoStart.Checked = _config.AutoStart;
             _miAutoStart.Click += OnAutoStartClick;
 
             ContextMenuStrip menu = new ContextMenuStrip();
             menu.Font = new Font("Microsoft YaHei UI", 9.5F);
-            menu.Items.Add(new ToolStripMenuItem("主界面...", null, OnMainFormClick));
-            menu.Items.Add(new ToolStripMenuItem("设置...", null, OnSettingsClick));
-            menu.Items.Add(new ToolStripMenuItem("统计...", null, OnStatsClick));
-            menu.Items.Add(new ToolStripMenuItem("检查更新...", null, OnUpdateCheckClick));
+            menu.Items.Add(new ToolStripMenuItem(I18n.T("主界面..."), null, OnMainFormClick));
+            menu.Items.Add(new ToolStripMenuItem(I18n.T("设置..."), null, OnSettingsClick));
+            menu.Items.Add(new ToolStripMenuItem(I18n.T("统计..."), null, OnStatsClick));
+            menu.Items.Add(new ToolStripMenuItem(I18n.T("检查更新..."), null, OnUpdateCheckClick));
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add(new ToolStripMenuItem("立即望远休息", null, OnRestNowClick));
+            menu.Items.Add(new ToolStripMenuItem(I18n.T("立即望远休息"), null, OnRestNowClick));
             menu.Items.Add(_miPause);
             menu.Items.Add(new ToolStripSeparator());
             menu.Items.Add(_miAutoStart);
             menu.Items.Add(new ToolStripSeparator());
-            menu.Items.Add(new ToolStripMenuItem("退出", null, OnExitClick));
+            menu.Items.Add(new ToolStripMenuItem(I18n.T("退出"), null, OnExitClick));
 
             _trayIcon = new NotifyIcon();
             _trayIcon.Icon = TrayIconPainter.CreateIcon();
-            _trayIcon.Text = "EyeCare20 护眼提醒";
+            _trayIcon.Text = I18n.T("EyeCare20 护眼提醒");
             _trayIcon.ContextMenuStrip = menu;
             _trayIcon.Visible = true;
             _trayIcon.DoubleClick += OnMainFormClick;
@@ -167,27 +169,27 @@ namespace EyeCare20
             switch (kind)
             {
                 case ReminderKind.Blink:
-                    item.Title = "眨眼训练";
-                    item.Subtitle = "闭眼 2 秒，完整眨眼 5 次";
+                    item.Title = I18n.T("眨眼训练");
+                    item.Subtitle = I18n.T("闭眼 2 秒，完整眨眼 5 次");
                     item.Icon = ReminderIconKind.Eye;
                     item.DurationSeconds = 12;
                     break;
                 case ReminderKind.Sit:
-                    item.Title = "久坐提醒";
-                    item.Subtitle = "站起来走动一下，伸展身体";
+                    item.Title = I18n.T("久坐提醒");
+                    item.Subtitle = I18n.T("站起来走动一下，伸展身体");
                     item.Icon = ReminderIconKind.Person;
                     item.DurationSeconds = 30;
                     break;
                 case ReminderKind.Water:
-                    item.Title = "喝水提醒";
-                    item.Subtitle = "喝口水，给身体补充水分";
+                    item.Title = I18n.T("喝水提醒");
+                    item.Subtitle = I18n.T("喝口水，给身体补充水分");
                     item.Icon = ReminderIconKind.Drop;
                     item.DurationSeconds = 15;
                     break;
                 case ReminderKind.Look:
                 default:
-                    item.Title = "望远休息";
-                    item.Subtitle = "看向 6 米外的物体，让眼睛放松一下";
+                    item.Title = I18n.T("望远休息");
+                    item.Subtitle = I18n.T("看向 6 米外的物体，让眼睛放松一下");
                     item.Icon = ReminderIconKind.Eye;
                     item.DurationSeconds = _config.LookDurationSeconds;
                     break;
@@ -287,12 +289,12 @@ namespace EyeCare20
             if (_pausedUntil > DateTime.Now)
             {
                 _pausedUntil = DateTime.MinValue;
-                _miPause.Text = "暂停 1 小时";
+                _miPause.Text = I18n.T("暂停 1 小时");
             }
             else
             {
                 _pausedUntil = DateTime.Now.AddHours(1);
-                _miPause.Text = "恢复提醒";
+                _miPause.Text = I18n.T("恢复提醒");
             }
         }
 
@@ -397,7 +399,7 @@ namespace EyeCare20
                         Log.Write("update check failed (all sources)");
                         if (manual)
                         {
-                            MessageBox.Show("检查更新失败，请稍后重试。\n（请确认网络可用，或更新源地址可访问）",
+                            MessageBox.Show(I18n.T("检查更新失败，请稍后重试。\n（请确认网络可用，或更新源地址可访问）"),
                                 "EyeCare20", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                         return;
@@ -407,7 +409,7 @@ namespace EyeCare20
                         Log.Write("update check: already latest, remote=" + info.Version);
                         if (manual)
                         {
-                            MessageBox.Show("当前已是最新版本（v" + UpdateChecker.CurrentVersion() + "）。",
+                            MessageBox.Show(I18n.AlreadyLatest(UpdateChecker.CurrentVersion().ToString()),
                                 "EyeCare20", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         }
                         return;

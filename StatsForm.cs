@@ -11,7 +11,6 @@ namespace EyeCare20
     internal sealed class StatsForm : Form
     {
         private static readonly Color Accent = Color.FromArgb(4, 138, 74);
-        private static readonly string[] KindLabels = { "望远休息完成", "眨眼训练完成", "久坐提醒完成", "喝水提醒完成" };
 
         private readonly bool _advancedMode;
         private readonly ChartPanel _chart;
@@ -24,7 +23,7 @@ namespace EyeCare20
         {
             _advancedMode = advancedMode;
 
-            Text = "EyeCare20 统计";
+            Text = I18n.T("EyeCare20 统计");
             FormBorderStyle = FormBorderStyle.FixedSingle;
             MaximizeBox = false;
             StartPosition = FormStartPosition.CenterScreen;
@@ -38,7 +37,7 @@ namespace EyeCare20
             ClientSize = new Size(440, chartY + 214 + 42);
 
             Label title = new Label();
-            title.Text = "统计";
+            title.Text = I18n.T("统计");
             title.Font = new Font("Microsoft YaHei UI", 14F, FontStyle.Bold);
             title.ForeColor = Color.FromArgb(26, 26, 26);
             title.AutoSize = true;
@@ -47,23 +46,24 @@ namespace EyeCare20
 
             // ---- 今日 ----
             GroupBox gToday = new GroupBox();
-            gToday.Text = " 今日 ";
+            gToday.Text = I18n.T(" 今日 ");
             gToday.ForeColor = Accent;
             gToday.Bounds = new Rectangle(24, 54, 392, todayH);
             Controls.Add(gToday);
 
+            string[] kindLabels = { I18n.T("望远休息完成"), I18n.T("眨眼训练完成"), I18n.T("久坐提醒完成"), I18n.T("喝水提醒完成") };
             _kindVals = new Label[4];
             for (int i = 0; i < 4; i++)
             {
-                _kindVals[i] = AddRow(gToday, KindLabels[i], i);
+                _kindVals[i] = AddRow(gToday, kindLabels[i], i);
             }
-            _lblSkip = AddRow(gToday, "跳过提醒", 4);
-            _lblRest = AddRow(gToday, "休息总时长", 5);
-            _lblActive = _advancedMode ? AddRow(gToday, "用眼时长", 6) : null;
+            _lblSkip = AddRow(gToday, I18n.T("跳过提醒"), 4);
+            _lblRest = AddRow(gToday, I18n.T("休息总时长"), 5);
+            _lblActive = _advancedMode ? AddRow(gToday, I18n.T("用眼时长"), 6) : null;
 
             // ---- 最近 7 天 ----
             GroupBox gChart = new GroupBox();
-            gChart.Text = " 最近 7 天 · 完成次数 ";
+            gChart.Text = I18n.T(" 最近 7 天 · 完成次数 ");
             gChart.ForeColor = Accent;
             gChart.Bounds = new Rectangle(24, chartY, 392, 214);
             Controls.Add(gChart);
@@ -74,7 +74,7 @@ namespace EyeCare20
             gChart.Controls.Add(_chart);
 
             Label tip = new Label();
-            tip.Text = "绿色 = 全部提醒完成次数 · 更新于打开时刻";
+            tip.Text = I18n.T("绿色 = 全部提醒完成次数 · 更新于打开时刻");
             tip.Font = new Font("Microsoft YaHei UI", 8.75F);
             tip.ForeColor = Color.FromArgb(140, 140, 140);
             tip.AutoSize = true;
@@ -94,7 +94,7 @@ namespace EyeCare20
             parent.Controls.Add(lab);
 
             Label val = new Label();
-            val.Text = "0 次";
+            val.Text = I18n.Times(0);
             val.AutoSize = true;
             val.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
             val.ForeColor = Color.FromArgb(26, 26, 26);
@@ -108,35 +108,15 @@ namespace EyeCare20
             DayStats today = StatsStore.GetDay(DateTime.Now);
             for (int i = 0; i < 4; i++)
             {
-                _kindVals[i].Text = today.DoneCount((ReminderKind)i).ToString() + " 次";
+                _kindVals[i].Text = I18n.Times(today.DoneCount((ReminderKind)i));
             }
-            _lblSkip.Text = today.Skipped.ToString() + " 次";
-            _lblRest.Text = FormatDuration(today.RestSeconds);
+            _lblSkip.Text = I18n.Times(today.Skipped);
+            _lblRest.Text = I18n.FormatDuration(today.RestSeconds);
             if (_advancedMode && _lblActive != null)
             {
-                _lblActive.Text = FormatDuration(today.ActiveMinutes * 60);
+                _lblActive.Text = I18n.FormatDuration(today.ActiveMinutes * 60);
             }
             _chart.Invalidate();
-        }
-
-        private static string FormatDuration(int totalSeconds)
-        {
-            if (totalSeconds <= 0)
-            {
-                return "0 秒";
-            }
-            int h = totalSeconds / 3600;
-            int m = (totalSeconds % 3600) / 60;
-            int s = totalSeconds % 60;
-            if (h > 0)
-            {
-                return h + " 小时 " + m + " 分";
-            }
-            if (m > 0)
-            {
-                return m + " 分 " + s + " 秒";
-            }
-            return s + " 秒";
         }
 
         /// <summary>最近 7 天完成次数柱状图（自绘）。</summary>
@@ -211,7 +191,7 @@ namespace EyeCare20
                                 g.DrawString(values[i].ToString(), numFont, numBrush,
                                     cx - 8, bottom - barH - 18);
                             }
-                            string label = (i == 6) ? "今天" : day.ToString("MM-dd");
+                            string label = (i == 6) ? I18n.T("今天") : day.ToString("MM-dd");
                             g.DrawString(label, dateFont, dateBrush, cx - 16, bottom + 6);
                         }
                         if (!any)
@@ -222,7 +202,7 @@ namespace EyeCare20
                                 using (StringFormat sf = new StringFormat())
                                 {
                                     sf.Alignment = StringAlignment.Center;
-                                    g.DrawString("暂无数据，完成第一次提醒后这里会出现柱状图", f, gray,
+                                    g.DrawString(I18n.T("暂无数据，完成第一次提醒后这里会出现柱状图"), f, gray,
                                         new RectangleF(0, (top + bottom) / 2 - 12, Width, 24), sf);
                                 }
                             }

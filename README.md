@@ -7,11 +7,13 @@
 [![Runtime](https://img.shields.io/badge/runtime-.NET%20Framework%204.8%20%E9%A2%84%E8%A3%85-success)]()
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-**[English intro](#english)** **·** **[下载安装](#-下载安装)** **·** **[专题页](https://gitee.com/songyun/EyeCare20)**
+**[中文](#中文)** · **[English](#english)** · **[专题页](https://gitee.com/songyun/EyeCare20)**
 
-***
+---
 
-## 为什么是 EyeCare20
+## 中文
+
+### 为什么是 EyeCare20
 
 长时间盯屏幕带来的眼干、眼疲劳、久坐和缺水，靠意志力提醒自己没用——让软件替你记得。
 基于医学推荐的 **20-20-20 法则**（每 20 分钟，看 20 英尺≈6 米外，持续 20 秒）与眨眼训练设计。
@@ -19,7 +21,7 @@
 它有多小？**一个不到 100KB 的单文件 exe**，不做任何事时仅占用约 35MB 内存，
 不联网、无任何依赖——Windows 10/11 预装运行时，下载即用。
 
-## 功能特性
+### 功能特性
 
 - **四类健康提醒统一管理**：望远休息（20-20-20）、眨眼训练（闭眼 2 秒 + 完整眨眼 5 次）、久坐提醒、喝水提醒——每类可独立开关/设间隔
 
@@ -37,35 +39,37 @@
 
 - **细节体验**：开机自启（免管理员）、全屏免打扰、锁屏不停歇、单实例、不抢键盘焦点
 
-## 截图
+- **多语言**：根据系统语言自动切换中英文，也可在设置中手动切换
+
+### 截图
 
 |                  望远休息提醒卡                  |             主界面（剩余时间）             |
 | :---------------------------------------: | :-------------------------------: |
 | ![望远休息提醒卡](screenshots/reminder-card.png) | ![主界面](screenshots/main-form.png) |
 
-## 📥 下载安装
+### 下载安装
 
 1. 从任一平台下载 `EyeCare20.exe`（单文件，无需安装）：
 
-   - **国内用户（Gitee）**：[Releases 下载](https://gitee.com/songyun/EyeCare20/releases)
+   - **Gitee**：[Releases 下载](https://gitee.com/songyun/EyeCare20/releases)
 
-   - **国际用户（GitHub）**：[Releases 下载](https://github.com/chenbf0713/EyeCare20/releases)
+   - **GitHub**：[Releases 下载](https://github.com/chenbf0713/EyeCare20/releases)
 2. 双击运行即可（首次运行若被 SmartScreen 提示：右键 exe → 属性 → 勾选"解除锁定"）
 3. 托盘右键 → **开机自启动**，一次设置长期有效
 
 > 配置与统计数据保存在 `%APPDATA%\EyeCare20\`，本地存储，升级或换机不会丢失。
 
-## 使用说明
+### 使用说明
 
 - **双击托盘图标**：打开主界面，实时查看各提醒的剩余倒计时
 
 - **右键托盘图标**：主界面 / 设置 / 统计 / 检查更新 / 立即望远休息 / 暂停 1 小时 / 退出
 
-- **设置页**：切换计时模式、调整四类提醒的间隔与开关、提醒声音、自启动
+- **设置页**：切换计时模式、调整四类提醒的间隔与开关、提醒声音、语言、自启动
 
 - **更新**：启动时自动静默检查；发现新版本弹窗，点"立即更新"即自动完成（下载→替换→重启约 2 秒）
 
-## 更新源说明（重要）
+### 更新源说明（重要）
 
 软件内置双更新源，开箱即用：
 
@@ -88,7 +92,7 @@
 
 `downloadUrl`（主，建议 Gitee Releases）失败时自动尝试 `downloadUrlAlt`（备用，建议 GitHub Releases）。
 
-## 从源码构建
+### 从源码构建
 
 ```bash
 git clone https://gitee.com/songyun/EyeCare20.git   # 或 github
@@ -105,32 +109,7 @@ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /target:winexe /out:EyeC
   /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll *.cs
 ```
 
-## 项目结构
-
-```
-EyeCare20/
-├── Program.cs            入口：单实例互斥锁
-├── TrayContext.cs        托盘常驻：菜单/卡片分发/更新检查
-├── Scheduler.cs          调度器：双模式计时 + 合并 + 错峰
-├── ActivityMonitor.cs    键鼠/音频活动检测（GetLastInputInfo + Core Audio）
-├── CardForm.cs           提醒卡基类：居中/淡入淡出/不抢焦点/倒计时暂停
-├── ReminderForm.cs       通用倒计时卡（单/多事项合并）+ 矢量图标
-├── BlinkForm.cs          眨眼训练动画卡
-├── MainForm.cs           主界面（剩余时间）
-├── SettingsForm.cs       设置页
-├── StatsForm.cs          统计页（7 天柱状图）
-├── StatsStore.cs         按日统计持久化
-├── UpdateChecker.cs      多源更新检查
-├── UpdateInstaller.cs    自动更新：下载/解包/替换脚本/回滚
-├── UpdateProgressForm.cs 更新进度窗
-├── UpdateSources.cs      内置双源配置（发布前改 Owner）
-├── FullScreenDetector.cs 全屏检测
-├── ConfigStore.cs        配置持久化
-├── Log.cs                文件日志
-└── docs/index.html       专题页（可托管 Gitee/GitHub Pages）
-```
-
-## 科学依据
+### 科学依据
 
 - [20-20-20 法则](https://lookaway.com/20-20-20-rule/)：美国眼科学会推荐的数字眼疲劳缓解方式，Aston 大学 2022 年研究曾对其进行严格验证（[研究摘要](https://pubmed.ncbi.nlm.nih.gov/35963776/)）
 
@@ -138,17 +117,13 @@ EyeCare20/
 
 - 久坐与定时补水：日常健康习惯的常见建议
 
-## English
-
-**EyeCare20** is a tiny, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, and dual-source (Gitee/GitHub) self-updating. Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11). [Download from Releases](https://github.com/chenbf0713/EyeCare20/releases) · 中文说明见上文.
-
-## 路线图
+### 路线图
 
 **核心提醒功能免费**，无功能墙、无提醒次数限制。当前已实现：
 
 - 📊 **今日报告**：当日完成/跳过/休息时长摘要 + 最近 7 天柱状图
 
-## 请作者喝杯咖啡
+### 请作者喝杯咖啡
 
 EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕：
 
@@ -162,13 +137,13 @@ EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕
 
 > 扫码即可支持作者——也欢迎 Star 代替咖啡 ✨
 
-## 许可证
+### 许可证
 
 [MIT](LICENSE) — 自由使用、修改、分发。
 
 > 提示：这是健康辅助工具，不能替代医疗建议。持续眼不适请就医。
 
-## 常见问题
+### 常见问题
 
 **Q：护眼软件哪个好？EyeCare20 适合什么人？**
 适合长时间使用电脑的办公族、程序员、学生，需要定时望远休息、眨眼训练、久坐和喝水提醒的 Windows 用户。软件体积小、零依赖，适合追求轻量绿色工具的用户。
@@ -185,6 +160,157 @@ EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕
 **Q：Windows 没有安装 .NET Framework 能用吗？**
 Windows 10/11 已预装 .NET Framework 4.8，下载即用。更旧的 Windows 7/8 需手动安装运行时。
 
-## 关键词
+### 关键词
 
 护眼软件 · 眼疲劳提醒 · 20-20-20 法则 · 久坐提醒 · 喝水提醒 · 眨眼训练 · 干眼症预防 · Windows 桌面提醒工具 · 绿色单文件 · 开源护眼软件 · 数字眼疲劳 · 视力保护
+
+---
+
+## English
+
+**EyeCare20** is a tiny, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, dual-source (Gitee/GitHub) self-updating, and multilingual support (Chinese/English, auto-detected from system language). Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11).
+
+### Why EyeCare20
+
+Staring at screens causes eye strain, dry eyes, sedentary fatigue, and dehydration — willpower alone can't remind you to take breaks. EyeCare20 is based on the medically recommended **20-20-20 rule** (every 20 minutes, look at something 20 feet ≈ 6 m away for 20 seconds) and blink training.
+
+How tiny is it? **A single exe under 100KB**, using ~35MB memory when idle, no network, no dependencies — Windows 10/11 has the runtime preinstalled, just download and run.
+
+### Features
+
+- **Four health reminders in one**: Look-away (20-20-20), blink training (close eyes 2s + full blinks 5x), sit break, hydration — each independently toggleable with custom intervals
+
+- **Smart merge & spacing**: Reminders due within 5 minutes of each other merge into one card; any two reminders are spaced at least 5 minutes apart, reducing interruptions
+
+- **Smart pause during rest**: Countdown freezes when keyboard/mouse activity or fullscreen apps (games/movies) are detected; watching videos or listening to music is unaffected
+
+- **Dual timing modes**: Simple mode cycles by system time; Advanced mode counts only active computer use (keyboard/mouse/audio output)
+
+- **Daily stats**: Records completed/skipped/rest duration per day, today's summary + 7-day bar chart, stored locally
+
+- **Auto update**: Built-in Gitee/GitHub dual-source fallback, one-click download → replace → restart
+
+- **Clean UI**: Centered reminder card, ring countdown, vector-drawn icons (zero image resources), `#048A4A` minimalist theme
+
+- **Details**: Autostart (no admin needed), fullscreen DND, lock-screen resilient, single instance, no keyboard focus stealing
+
+- **Multilingual**: Auto-switches Chinese/English based on system language, manual override in settings
+
+### Screenshots
+
+|                  Look-away reminder card                  |             Main window (remaining time)             |
+| :----------------------------------------------: | :--------------------------------------: |
+| ![Look-away reminder card](screenshots/reminder-card.png) | ![Main window](screenshots/main-form.png) |
+
+### Download & Install
+
+1. Download `EyeCare20.exe` from either platform (single file, no installation needed):
+
+   - **Gitee**: [Releases](https://gitee.com/songyun/EyeCare20/releases)
+
+   - **GitHub**: [Releases](https://github.com/chenbf0713/EyeCare20/releases)
+2. Double-click to run (if SmartScreen warns: right-click exe → Properties → check "Unblock")
+3. Right-click tray icon → **Auto-start** — set once, works long-term
+
+> Config and stats are stored locally in `%APPDATA%\EyeCare20\`, surviving upgrades and machine migration.
+
+### Usage
+
+- **Double-click tray icon**: Open main window, view remaining countdown for each reminder
+
+- **Right-click tray icon**: Main window / Settings / Stats / Check for updates / Rest now / Pause 1 hour / Exit
+
+- **Settings**: Switch timing mode, adjust intervals and toggles for all four reminders, sound, language, autostart
+
+- **Updates**: Auto-check silently on startup; pop up when new version found, click "Update now" to auto-complete (download → replace → restart, ~2 seconds)
+
+### Update Sources
+
+The app has built-in dual update sources, working out of the box:
+
+| Priority | Platform | update.json URL |
+| --- | -------- | --------------- |
+| 1 | Gitee (fast in China) | `https://gitee.com/songyun/EyeCare20/raw/main/update.json` |
+| 2 | GitHub (international fallback) | `https://raw.githubusercontent.com/chenbf0713/EyeCare20/main/update.json` |
+
+Custom update source: set `UpdateUrl` in `%APPDATA%\EyeCare20\config.json` (multiple URLs separated by `|`, tried in order).
+`update.json` format:
+
+```json
+{
+  "version": "1.3.1.0",
+  "downloadUrl": "https://gitee.com/songyun/EyeCare20/releases/download/v1.3.1/EyeCare20.exe",
+  "downloadUrlAlt": "https://github.com/chenbf0713/EyeCare20/releases/download/v1.3.1/EyeCare20.exe",
+  "notes": "Release notes"
+}
+```
+
+### Build from Source
+
+```bash
+git clone https://github.com/chenbf0713/EyeCare20.git   # or gitee
+cd EyeCare20
+dotnet build -c Release
+# Output: bin/Release/net48/EyeCare20.exe
+```
+
+Fallback without SDK (Windows built-in compiler, C# 5 syntax only):
+
+```bash
+C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /target:winexe /out:EyeCare20.exe ^
+  /r:System.Windows.Forms.dll /r:System.Drawing.dll /r:System.Runtime.Serialization.dll ^
+  /r:System.IO.Compression.dll /r:System.IO.Compression.FileSystem.dll *.cs
+```
+
+### Scientific Basis
+
+- [20-20-20 rule](https://lookaway.com/20-20-20-rule/): A digital eye strain relief method recommended by the American Academy of Ophthalmology. Aston University's 2022 study rigorously validated it ([study abstract](https://pubmed.ncbi.nlm.nih.gov/35963776/))
+
+- Blink training: Blink frequency drops significantly during screen focus; deliberate full blinks are a common behavioral therapy for dry eye management
+
+- Sedentary breaks & hydration: Common daily health habit recommendations
+
+### Roadmap
+
+**Core reminder features are free**, no paywalls, no reminder count limits. Currently implemented:
+
+- 📊 **Today's report**: Daily completed/skipped/rest duration summary + 7-day bar chart
+
+### Buy the Author a Coffee
+
+EyeCare20 is free and open source. If it helped you, consider buying the author a coffee ☕:
+
+- **WeChat / Alipay**: QR codes below
+
+|              WeChat              |              Alipay              |
+| :------------------------------: | :------------------------------: |
+| ![WeChat QR](donate/wechat.png)  | ![Alipay QR](donate/alipay.png)  |
+
+> Scan to support the author — or just Star the repo ✨
+
+### License
+
+[MIT](LICENSE) — free to use, modify, and distribute.
+
+> Note: This is a health aid tool, not a substitute for medical advice. See a doctor for persistent eye discomfort.
+
+### FAQ
+
+**Q: Who is EyeCare20 for?**
+Office workers, programmers, and students who spend long hours on computers and need timed look-away, blink, sitting, and hydration reminders on Windows. Small size, zero dependencies — ideal for users who want lightweight portable tools.
+
+**Q: What is the 20-20-20 rule?**
+Every 20 minutes of screen use, look at an object 20 feet (about 6 meters) away for 20 seconds. It's a common recommendation for reducing digital eye strain.
+
+**Q: Does EyeCare20 connect to the internet or upload user data?**
+The app itself doesn't connect or upload data. All config and stats are stored locally in `%APPDATA%\EyeCare20\`. It only accesses Gitee/GitHub for update checking.
+
+**Q: Can eye, sitting, and hydration reminders run simultaneously?**
+Yes. All four reminders can be toggled and configured independently. Smart merge and spacing prevents simultaneous interruptions.
+
+**Q: Can I use it without .NET Framework installed?**
+Windows 10/11 has .NET Framework 4.8 preinstalled, so it works out of the box. Older Windows 7/8 may need to install the runtime manually.
+
+### Keywords
+
+eye care software, eye strain reminder, 20-20-20 rule, sit break reminder, hydration reminder, blink training, dry eye prevention, Windows desktop reminder tool, portable single file, open source eye care, digital eye strain, vision protection

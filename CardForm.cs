@@ -308,7 +308,7 @@ namespace EyeCare20
         protected LinkLabel CreateSkipLink()
         {
             LinkLabel skip = new LinkLabel();
-            skip.Text = "跳过";
+            skip.Text = I18n.T("跳过");
             skip.Font = new Font("Microsoft YaHei UI", 9.75F);
             skip.LinkColor = Color.FromArgb(150, 150, 150);
             skip.ActiveLinkColor = Accent;

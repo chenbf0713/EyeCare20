@@ -60,6 +60,9 @@ namespace EyeCare20
         [DataMember(Name = "AutoCheckUpdate")]
         public bool AutoCheckUpdate;
 
+        [DataMember(Name = "Language")]
+        public string Language;
+
         public bool IsAdvanced
         {
             get { return string.Equals(TimerMode, "advanced", StringComparison.OrdinalIgnoreCase); }
@@ -86,6 +89,7 @@ namespace EyeCare20
             WaterIntervalMinutes = 45;
             UpdateUrl = "";
             AutoCheckUpdate = true;
+            Language = "";
         }
 
         /// <summary>DataContract 反序列化不调用构造函数，用此回调补默认值。</summary>
