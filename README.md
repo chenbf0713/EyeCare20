@@ -131,9 +131,9 @@ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /target:winexe /out:EyeC
 
 EyeCare20 免费开源。如果它帮到了你，欢迎请作者喝杯咖啡 ☕：
 
-- **爱发电**：[afdian.com/your-id](https://afdian.com/your-id)（推荐，支持一次性与月度）
+- **爱发电**：[afdian.com/a/chendapang](https://afdian.com/a/chendapang)（推荐，支持一次性与月度赞助）
 
-- **微信 / 支付宝**：收款码见下方（放入 `donate/` 目录后自动显示）
+- **微信 / 支付宝**：收款码见下方
 
 |              微信             |              支付宝             |
 | :-------------------------: | :--------------------------: |
@@ -283,6 +283,8 @@ C:\Windows\Microsoft.NET\Framework64\v4.0.30319\csc.exe /target:winexe /out:EyeC
 ### Buy the Author a Coffee
 
 EyeCare20 is free and open source. If it helped you, consider buying the author a coffee ☕:
+
+- **Afdian** (sponsor platform): [afdian.com/a/chendapang](https://afdian.com/a/chendapang) (one-time or monthly)
 
 - **WeChat / Alipay**: QR codes below
 
