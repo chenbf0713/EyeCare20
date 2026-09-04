@@ -11,7 +11,7 @@
 [![Runtime](https://img.shields.io/badge/runtime-.NET%20Framework%204.8%20%E9%A2%84%E8%A3%85-success)]()
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
-**[中文](#中文)** · **[English](#english)** · **[专题页](https://gitee.com/songyun/EyeCare20)**
+**[中文](#中文)** · **[English](#english)** · **[专题页](https://chenbf0713.github.io/EyeCare20/)**
 
 ***
 
