@@ -29,9 +29,6 @@ namespace EyeCare20
         private readonly CheckBox _chkSound;
         private readonly CheckBox _chkAutoStart;
         private readonly CheckBox _chkAutoUpdate;
-        private readonly TextBox _txtLicense;
-        private readonly Button _btnActivate;
-        private readonly Label _lblLicenseState;
         private readonly ComboBox _cmbLang;
 
         public SettingsForm(AppConfig config)
@@ -45,7 +42,7 @@ namespace EyeCare20
             ShowInTaskbar = false;
             BackColor = Color.White;
             Font = new Font("Microsoft YaHei UI", 9.5F);
-            ClientSize = new Size(420, 696);
+            ClientSize = new Size(420, 620);
 
             Color accent = Color.FromArgb(4, 138, 74);
 
@@ -171,48 +168,12 @@ namespace EyeCare20
             _chkAutoUpdate.Checked = _config.AutoCheckUpdate;
             gUpdate.Controls.Add(_chkAutoUpdate);
 
-            // ---- Pro 激活 ----
-            GroupBox gPro = new GroupBox();
-            gPro.Text = I18n.T(" Pro ");
-            gPro.ForeColor = accent;
-            gPro.Bounds = new Rectangle(24, 582, 372, 92);
-            Controls.Add(gPro);
-
-            _lblLicenseState = new Label();
-            _lblLicenseState.Text = LicenseStore.IsPro ? I18n.T("已激活 Pro ✓ 感谢支持！") : I18n.T("免费版");
-            _lblLicenseState.Font = new Font("Microsoft YaHei UI", 10F, FontStyle.Bold);
-            _lblLicenseState.ForeColor = LicenseStore.IsPro ? accent : Color.FromArgb(140, 140, 140);
-            _lblLicenseState.AutoSize = true;
-            _lblLicenseState.Location = new Point(16, 24);
-            gPro.Controls.Add(_lblLicenseState);
-
-            if (!LicenseStore.IsPro)
-            {
-                _txtLicense = new TextBox();
-                _txtLicense.Location = new Point(16, 52);
-                _txtLicense.Width = 210;
-                _txtLicense.ForeColor = Color.FromArgb(60, 60, 60);
-                _txtLicense.MaxLength = 17;
-                _txtLicense.CharacterCasing = CharacterCasing.Upper;
-                gPro.Controls.Add(_txtLicense);
-
-                _btnActivate = new Button();
-                _btnActivate.Text = I18n.T("激活");
-                _btnActivate.FlatStyle = FlatStyle.Flat;
-                _btnActivate.FlatAppearance.BorderColor = accent;
-                _btnActivate.ForeColor = accent;
-                _btnActivate.Size = new Size(64, 26);
-                _btnActivate.Location = new Point(236, 50);
-                _btnActivate.Click += OnActivateClick;
-                gPro.Controls.Add(_btnActivate);
-            }
-
             Label status = new Label();
             status.Text = I18n.T("改动即时生效并自动保存");
             status.Font = new Font("Microsoft YaHei UI", 8.75F);
             status.ForeColor = Color.FromArgb(140, 140, 140);
             status.AutoSize = true;
-            status.Location = new Point(26, 682);
+            status.Location = new Point(26, 588);
             Controls.Add(status);
 
             // ---- 事件（初始化完成后才挂接，避免误触发）----
@@ -280,7 +241,7 @@ namespace EyeCare20
             }
         }
 
-        /// <summary>语言切换：保存配置并提示重启生效。避免初始化期间误触发。</summary>
+        /// <summary>语言切换：保存配置后自动重启应用以应用新语言。避免初始化期间误触发。</summary>
         private void OnLangChanged(object sender, EventArgs e)
         {
             if (_loading)
@@ -294,30 +255,16 @@ namespace EyeCare20
                 case 2: newLang = "en"; break;
                 default: newLang = ""; break;
             }
-            _config.Language = newLang;
-            ConfigStore.Save(_config);
-            MessageBox.Show(I18n.T("语言设置将在重启后生效。"), "EyeCare20",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
-        }
-
-        private void OnActivateClick(object sender, EventArgs e)
-        {
-            if (_txtLicense == null)
+            // 值未变化则不重启
+            if (newLang == _config.Language)
             {
                 return;
             }
-            string code = _txtLicense.Text.Trim();
-            if (LicenseStore.Activate(code))
-            {
-                MessageBox.Show(I18n.T("激活成功，感谢支持！"), "EyeCare20",
-                    MessageBoxButtons.OK, MessageBoxIcon.Information);
-                Close();   // 重新打开设置页即显示 Pro 状态
-            }
-            else
-            {
-                MessageBox.Show(I18n.T("激活码无效，请检查后重试。"), "EyeCare20",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
+            _config.Language = newLang;
+            ConfigStore.Save(_config);
+            // 关闭设置窗口，重启应用
+            Close();
+            Program.Restart();
         }
 
         private void OnChanged(object sender, EventArgs e)

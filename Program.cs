@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -6,12 +7,14 @@ namespace EyeCare20
 {
     internal static class Program
     {
+        private static Mutex _mutex;
+
         [STAThread]
         private static void Main()
         {
             Log.Write("main entered");
             bool createdNew;
-            Mutex mutex = new Mutex(true, "Global\\EyeCare20.SingleInstance", out createdNew);
+            _mutex = new Mutex(true, "Global\\EyeCare20.SingleInstance", out createdNew);
             Log.Write("mutex created, createdNew=" + createdNew);
             if (!createdNew)
             {
@@ -48,10 +51,33 @@ namespace EyeCare20
             }
             finally
             {
-                try { mutex.ReleaseMutex(); }
+                try { _mutex.ReleaseMutex(); }
                 catch (Exception) { }
-                GC.KeepAlive(mutex);
+                GC.KeepAlive(_mutex);
             }
+        }
+
+        /// <summary>重启应用：释放单实例锁，启动新进程，退出当前进程。</summary>
+        public static void Restart()
+        {
+            try
+            {
+                // 先释放单实例 Mutex，避免新进程因获取不到锁而立即退出
+                try { _mutex.ReleaseMutex(); }
+                catch (Exception) { }
+                // 启动新实例
+                Process.Start(new ProcessStartInfo(Application.ExecutablePath)
+                {
+                    UseShellExecute = false,
+                });
+                Log.Write("restart: new instance launched");
+            }
+            catch (Exception ex)
+            {
+                Log.WriteError("restart-launch", ex);
+            }
+            // 退出当前实例
+            Application.Exit();
         }
     }
 }
