@@ -39,7 +39,6 @@ namespace EyeCare20
             _sync = SynchronizationContext.Current;
 
             _config = ConfigStore.Load();
-            LicenseStore.Load();
             I18n.Init(_config.Language);
             Log.Write("config loaded mode=" + _config.TimerMode
                 + " lookInterval=" + _config.LookIntervalMinutes

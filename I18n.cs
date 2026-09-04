@@ -69,17 +69,11 @@ namespace EyeCare20
             {"开机自动启动", "Auto-start on boot"},
             {" 检查更新 ", " Updates "},
             {"启动时自动检查更新", "Auto-check for updates on startup"},
-            {" Pro ", " Pro "},
-            {"已激活 Pro ✓ 感谢支持！", "Pro activated ✓ Thank you!"},
-            {"免费版", "Free version"},
-            {"激活", "Activate"},
             {"改动即时生效并自动保存", "Changes apply instantly and auto-save"},
             {" 语言 ", " Language "},
             {"自动（跟随系统）", "Auto (follow system)"},
             {"中文", "Chinese"},
             {"English", "English"},
-            {"激活成功，感谢支持！", "Activation successful, thank you!"},
-            {"激活码无效，请检查后重试。", "Invalid activation code, please check and retry."},
             {"语言设置将在重启后生效。", "Language setting will take effect after restart."},
 
             // ---- 统计页 ----
