@@ -12,9 +12,13 @@
 <meta property="og:title" content="EyeCare20 · Windows 护眼提醒小工具">
 <meta property="og:description" content="基于 20-20-20 法则的 Windows 护眼提醒：望远休息、眨眼训练、久坐提醒、喝水提醒，智能合并，休息中自动暂停，本地数据统计。">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://gitee.com/songyun/EyeCare20/raw/main/docs/logo.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="EyeCare20 · Windows 护眼提醒小工具">
 <meta name="twitter:description" content="基于 20-20-20 法则的 Windows 护眼提醒：望远休息、眨眼训练、久坐提醒、喝水提醒，智能合并，休息中自动暂停。">
+<meta name="twitter:image" content="https://gitee.com/songyun/EyeCare20/raw/main/docs/logo.jpg">
+<link rel="icon" type="image/jpeg" href="logo.jpg">
+<link rel="apple-touch-icon" href="logo.jpg">
 <link rel="canonical" href="https://gitee.com/songyun/eyecare20">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -46,7 +50,7 @@
 
   /* hero */
   .hero { text-align: center; padding: 88px 24px 72px; }
-  .logo { width: 84px; height: 84px; margin: 0 auto 28px; display: block; }
+  .logo { width: 84px; height: 84px; margin: 0 auto 28px; display: block; border-radius: 20px; box-shadow: 0 4px 20px rgba(4,138,74,.18); }
   .hero h1 { font-size: 44px; font-weight: 700; letter-spacing: -1px; }
   .hero .tagline { font-size: 20px; color: var(--sub); margin: 14px 0 8px; }
   .hero .rule { font-size: 15px; color: var(--green); font-weight: 600; }
@@ -181,10 +185,7 @@
 
 <!-- ===== Hero ===== -->
 <header class="hero">
-  <svg class="logo" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="EyeCare20">
-    <path d="M4 32 C14 16 50 16 60 32 C50 48 14 48 4 32 Z" fill="#048A4A"/>
-    <circle cx="32" cy="32" r="9" fill="#FFFFFF"/>
-  </svg>
+  <img class="logo" src="logo.jpg" alt="EyeCare20" width="84" height="84">
   <h1>EyeCare20</h1>
   <p class="tagline" data-i18n="tagline">每用眼 20 分钟，望远 20 秒 —— Windows 护眼提醒小工具</p>
   <p class="rule" data-i18n="rule">望远休息 · 眨眼训练 · 久坐提醒 · 喝水提醒</p>

@@ -1,5 +1,9 @@
 # EyeCare20 · 护眼提醒小工具
 
+<p align="center">
+  <img src="docs/logo.jpg" alt="EyeCare20" width="120" height="120">
+</p>
+
 > 每用眼 20 分钟，望远 20 秒 —— 一个极小、零依赖、绿色单文件的 Windows 桌面护眼助手
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)]()
@@ -9,7 +13,7 @@
 
 **[中文](#中文)** · **[English](#english)** · **[专题页](https://gitee.com/songyun/EyeCare20)**
 
----
+***
 
 ## 中文
 
@@ -164,7 +168,7 @@ Windows 10/11 已预装 .NET Framework 4.8，下载即用。更旧的 Windows 7/
 
 护眼软件 · 眼疲劳提醒 · 20-20-20 法则 · 久坐提醒 · 喝水提醒 · 眨眼训练 · 干眼症预防 · Windows 桌面提醒工具 · 绿色单文件 · 开源护眼软件 · 数字眼疲劳 · 视力保护
 
----
+***
 
 ## English
 
@@ -174,7 +178,7 @@ Windows 10/11 已预装 .NET Framework 4.8，下载即用。更旧的 Windows 7/
 
 Staring at screens causes eye strain, dry eyes, sedentary fatigue, and dehydration — willpower alone can't remind you to take breaks. EyeCare20 is based on the medically recommended **20-20-20 rule** (every 20 minutes, look at something 20 feet ≈ 6 m away for 20 seconds) and blink training.
 
-How tiny is it? **A single exe under 100KB**, using ~35MB memory when idle, no network, no dependencies — Windows 10/11 has the runtime preinstalled, just download and run.
+How tiny is it? **A single exe under 100KB**, using \~35MB memory when idle, no network, no dependencies — Windows 10/11 has the runtime preinstalled, just download and run.
 
 ### Features
 
@@ -198,8 +202,8 @@ How tiny is it? **A single exe under 100KB**, using ~35MB memory when idle, no n
 
 ### Screenshots
 
-|                  Look-away reminder card                  |             Main window (remaining time)             |
-| :----------------------------------------------: | :--------------------------------------: |
+|                  Look-away reminder card                  |        Main window (remaining time)       |
+| :-------------------------------------------------------: | :---------------------------------------: |
 | ![Look-away reminder card](screenshots/reminder-card.png) | ![Main window](screenshots/main-form.png) |
 
 ### Download & Install
@@ -222,16 +226,16 @@ How tiny is it? **A single exe under 100KB**, using ~35MB memory when idle, no n
 
 - **Settings**: Switch timing mode, adjust intervals and toggles for all four reminders, sound, language, autostart
 
-- **Updates**: Auto-check silently on startup; pop up when new version found, click "Update now" to auto-complete (download → replace → restart, ~2 seconds)
+- **Updates**: Auto-check silently on startup; pop up when new version found, click "Update now" to auto-complete (download → replace → restart, \~2 seconds)
 
 ### Update Sources
 
 The app has built-in dual update sources, working out of the box:
 
-| Priority | Platform | update.json URL |
-| --- | -------- | --------------- |
-| 1 | Gitee (fast in China) | `https://gitee.com/songyun/EyeCare20/raw/main/update.json` |
-| 2 | GitHub (international fallback) | `https://raw.githubusercontent.com/chenbf0713/EyeCare20/main/update.json` |
+| Priority | Platform                        | update.json URL                                                           |
+| -------- | ------------------------------- | ------------------------------------------------------------------------- |
+| 1        | Gitee (fast in China)           | `https://gitee.com/songyun/EyeCare20/raw/main/update.json`                |
+| 2        | GitHub (international fallback) | `https://raw.githubusercontent.com/chenbf0713/EyeCare20/main/update.json` |
 
 Custom update source: set `UpdateUrl` in `%APPDATA%\EyeCare20\config.json` (multiple URLs separated by `|`, tried in order).
 `update.json` format:
@@ -282,9 +286,9 @@ EyeCare20 is free and open source. If it helped you, consider buying the author 
 
 - **WeChat / Alipay**: QR codes below
 
-|              WeChat              |              Alipay              |
-| :------------------------------: | :------------------------------: |
-| ![WeChat QR](donate/wechat.png)  | ![Alipay QR](donate/alipay.png)  |
+|              WeChat             |              Alipay             |
+| :-----------------------------: | :-----------------------------: |
+| ![WeChat QR](donate/wechat.png) | ![Alipay QR](donate/alipay.png) |
 
 > Scan to support the author — or just Star the repo ✨
 
