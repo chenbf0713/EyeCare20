@@ -151,18 +151,21 @@ EyeCare20/
 
 **EyeCare20** is a 68KB, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, and fully automatic dual-source (Gitee/GitHub) self-updating. Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11). [Download from Releases](https://github.com/chenbf0713/EyeCare20/releases) · 中文说明见上文。
 
-## Pro 版说明
+## 路线图
 
-核心提醒功能**永久免费**。Pro（¥12.9 买断，一次性激活码，离线校验）解锁进阶能力：
+**核心提醒功能永久免费**，无功能墙、无提醒次数限制。当前已实现：
 
-- 📊 年度用眼健康报告（可分享）
+- 📊 **今日报告**（免费）：当日完成/跳过/休息时长摘要 + 最近 7 天柱状图
 
-- 🍅 番茄工作法模式（专注 25 分 + 休息 5 分）
+规划中的进阶能力（**未来 Pro 版，一次性买断**）：
 
-- 📤 周/月报导出
+- 📈 **长期数据分析**：周/月/年趋势报告，用眼习惯变化曲线
 
-购买渠道：Microsoft Store 搜 "EyeCare20"，或爱发电赞助后私信领取激活码。
-激活方式：设置 → Pro → 输入激活码。免费版无任何功能墙、无提醒次数限制。
+- 📤 **报告导出**：PDF / 图片格式，便于分享或打印
+
+- 🍅 **番茄工作法模式**：专注 25 分 + 休息 5 分，与护眼提醒协同
+
+> Pro 功能采用 Open Core 模式：核心提醒与今日报告开源（MIT），长期分析与报告导出作为独立模块闭源分发。激活码离线校验，无需联网。具体定价与上线时间待定。
 
 ## 请作者喝杯咖啡
 
@@ -176,7 +179,7 @@ EyeCare20 会永久免费开源。如果它帮到了你，欢迎请作者喝杯�
 | :-------------------------: | :--------------------------: |
 | ![微信收款码](donate/wechat.png) | ![支付宝收款码](donate/alipay.png) |
 
-> 图片暂未放置时，上面的占位图不影响阅读——也欢迎 Star 代替咖啡 ✨
+> 扫码即可支持作者——也欢迎 Star 代替咖啡 ✨
 
 ## 许可证
 

@@ -100,9 +100,23 @@
   footer a { color: var(--green-dark); text-decoration: none; margin: 0 8px; }
   footer a:hover { text-decoration: underline; }
 
+  .donate-grid {
+    display: flex; gap: 28px; justify-content: center; flex-wrap: wrap; margin: 0 auto 24px;
+  }
+  .donate-card {
+    background: #fff; border: 1px solid #F0F0F0; border-radius: 16px;
+    padding: 18px 18px 14px; text-align: center;
+    box-shadow: 0 2px 12px rgba(4, 138, 74, 0.06);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .donate-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(4, 138, 74, 0.12); }
+  .donate-card img { width: 168px; height: 168px; object-fit: cover; border-radius: 10px; display: block; }
+  .donate-label { margin-top: 10px; font-size: 14px; color: var(--sub); font-weight: 500; }
+
   @media (max-width: 720px) {
     .hero h1 { font-size: 34px; }
     .shots { grid-template-columns: 1fr; }
+    .donate-card img { width: 140px; height: 140px; }
   }
 </style>
 </head>
@@ -240,8 +254,17 @@
     <p style="text-align:center; color:var(--sub); font-size:15px; max-width:560px; margin:0 auto 28px;">
       EyeCare20 永久免费开源。如果它帮到了你，一杯咖啡就是最好的鼓励。
     </p>
+    <div class="donate-grid">
+      <div class="donate-card">
+        <img src="donate/wechat.png" alt="微信收款码" loading="lazy">
+        <div class="donate-label">微信</div>
+      </div>
+      <div class="donate-card">
+        <img src="donate/alipay.png" alt="支付宝收款码" loading="lazy">
+        <div class="donate-label">支付宝</div>
+      </div>
+    </div>
     <div class="dl-box">
-      <a class="btn btn-primary" href="https://afdian.com/your-id" target="_blank">爱发电 · 支持作者</a>
       <a class="btn btn-ghost" href="https://gitee.com/songyun/EyeCare20" target="_blank">点个 Star ✨</a>
     </div>
   </div>
