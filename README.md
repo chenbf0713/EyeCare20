@@ -1,9 +1,9 @@
 # EyeCare20 · 护眼提醒小工具
 
-> 每用眼 20 分钟，望远 20 秒 —— 一个 **68KB**、零依赖、绿色单文件的 Windows 桌面护眼助手
+> 每用眼 20 分钟，望远 20 秒 —— 一个极小、零依赖、绿色单文件的 Windows 桌面护眼助手
 
 [![Platform](https://img.shields.io/badge/platform-Windows%2010%2F11-blue)]()
-[![Size](https://img.shields.io/badge/size-68KB-brightgreen)]()
+[![Size](https://img.shields.io/badge/size-极小-brightgreen)]()
 [![Runtime](https://img.shields.io/badge/runtime-.NET%20Framework%204.8%20%E9%A2%84%E8%A3%85-success)]()
 [![License](https://img.shields.io/badge/license-MIT-green)]()
 
@@ -16,12 +16,12 @@
 长时间盯屏幕带来的眼干、眼疲劳、久坐和缺水，靠意志力提醒自己没用——让软件替你记得。
 基于医学推荐的 **20-20-20 法则**（每 20 分钟，看 20 英尺≈6 米外，持续 20 秒）与眨眼训练设计。
 
-它有多小？**一个 68KB 的 exe**（不到同类 Electron 方案的 1/4000），不做任何事时仅占用约 35MB 内存，
+它有多小？**不到 100KB 的单文件 exe**（不到同类 Electron 方案的千分之一），不做任何事时仅占用约 35MB 内存，
 不联网、不上传、无任何依赖——Windows 10/11 预装运行时，下载即用。
 
 | <br />    | EyeCare20    | Stretchly    | Project Eye |
 | --------- | ------------ | ------------ | ----------- |
-| 体积        | **68 KB**    | \~300 MB     | \~20 MB     |
+| 体积        | **极小**       | \~300 MB     | \~20 MB     |
 | 内存占用      | \~35 MB      | \~200 MB+    | \~80 MB     |
 | 依赖        | 无            | Electron 运行时 | .NET        |
 | 提醒合并/错峰   | **有**        | 无            | 无           |
@@ -149,7 +149,7 @@ EyeCare20/
 
 ## English
 
-**EyeCare20** is a 68KB, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, and fully automatic dual-source (Gitee/GitHub) self-updating. Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11). [Download from Releases](https://github.com/chenbf0713/EyeCare20/releases) · 中文说明见上文。
+**EyeCare20** is a tiny, zero-dependency Windows tray app for the 20-20-20 eye-care rule, plus blink training, sitting and hydration reminders — with smart merge/spacing between reminders, countdown auto-pause on input or fullscreen apps, daily stats, and fully automatic dual-source (Gitee/GitHub) self-updating. Built with plain C# WinForms (.NET Framework 4.8 preinstalled on Windows 10/11). [Download from Releases](https://github.com/chenbf0713/EyeCare20/releases) · 中文说明见上文。
 
 ## 路线图
 
