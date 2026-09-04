@@ -196,10 +196,10 @@
     <span class="badge" data-i18n="badge_mit">MIT 开源</span>
   </div>
   <div class="dl-box">
-    <a class="btn btn-primary" id="btn-gitee" href="https://gitee.com/songyun/EyeCare20/releases">Gitee 下载</a>
-    <a class="btn btn-ghost" id="btn-github" href="https://github.com/chenbf0713/EyeCare20/releases">GitHub 下载</a>
+    <a class="btn btn-primary" id="btn-github" href="https://github.com/chenbf0713/EyeCare20/releases">GitHub 下载</a>
+    <a class="btn btn-ghost" id="btn-gitee" href="https://gitee.com/songyun/EyeCare20/releases">Gitee 下载</a>
   </div>
-  <p class="dl-hint" id="dl-hint" data-i18n="dl_hint">正在检测线路，为你推荐最快下载源…</p>
+  <p class="dl-hint" id="dl-hint" data-i18n="dl_hint">国内访问 GitHub 慢？可从 Gitee 下载（同步更新）</p>
 </header>
 
 <!-- ===== Features ===== -->
@@ -341,16 +341,16 @@
     </div>
     <div class="dl-box">
       <a class="btn btn-primary" href="https://afdian.com/a/chendapang" target="_blank" data-i18n="donate_afdian">爱发电 · 赞助作者</a>
-      <a class="btn btn-ghost" href="https://gitee.com/songyun/EyeCare20" target="_blank" data-i18n="donate_star">点个 Star ✨</a>
+      <a class="btn btn-ghost" href="https://github.com/chenbf0713/EyeCare20" target="_blank" data-i18n="donate_star">点个 Star ✨</a>
     </div>
   </div>
 </section>
 
 <footer>
   <div>
-    <a href="https://gitee.com/songyun/EyeCare20" data-i18n="footer_gitee">Gitee 仓库</a>·
     <a href="https://github.com/chenbf0713/EyeCare20" data-i18n="footer_github">GitHub 仓库</a>·
-    <a href="https://gitee.com/songyun/EyeCare20/releases" data-i18n="footer_changelog">更新日志</a>·
+    <a href="https://gitee.com/songyun/EyeCare20" data-i18n="footer_gitee">Gitee 仓库</a>·
+    <a href="https://github.com/chenbf0713/EyeCare20/releases" data-i18n="footer_changelog">更新日志</a>·
     <a href="mailto:chenbf0713@163.com" data-i18n="footer_email">反馈邮箱</a>
   </div>
   <p style="margin-top:14px;" data-i18n="footer_copy">EyeCare20 · MIT License · 健康辅助工具，不替代医疗建议</p>
@@ -365,9 +365,7 @@ var I18N = {
     badge_portable: "绿色单文件",
     badge_nodep: "零依赖 · 免安装",
     badge_mit: "MIT 开源",
-    dl_hint: "正在检测线路，为你推荐最快下载源…",
-    dl_hint_gitee: "已检测到国内线路，推荐从 <b>Gitee</b> 下载（最快）",
-    dl_hint_github: "建议从 <b>GitHub</b> 下载（或试试 Gitee）",
+    dl_hint: "国内访问 GitHub 慢？可从 Gitee 下载（同步更新）",
     features_title: "四类提醒，一个轻量的托盘小工具",
     f_look_title: "望远休息",
     f_look_desc: "每 20 分钟弹一张居中倒计时卡，引导看向 6 米外放松睫状肌。基于美国眼科学会推荐的 20-20-20 法则。",
@@ -437,9 +435,7 @@ var I18N = {
     badge_portable: "Portable single file",
     badge_nodep: "Zero dependencies",
     badge_mit: "MIT Open Source",
-    dl_hint: "Detecting network, recommending the fastest download source…",
-    dl_hint_gitee: "China network detected, recommend <b>Gitee</b> (fastest)",
-    dl_hint_github: "Recommend <b>GitHub</b> (or try Gitee)",
+    dl_hint: "GitHub slow in China? Download from Gitee instead (synced)",
     features_title: "Four reminders, one lightweight tray app",
     f_look_title: "Look-away Rest",
     f_look_desc: "Every 20 minutes, a centered countdown card pops up, guiding you to look 6 m away to relax ciliary muscles. Based on the 20-20-20 rule recommended by the American Academy of Ophthalmology.",
@@ -526,22 +522,10 @@ function setLang(lang) {
   var toggle = document.getElementById("lang-toggle");
   toggle.textContent = lang === "zh" ? "English" : "中文";
   try { localStorage.setItem("eyecare20_lang", lang); } catch(e) {}
-  // Re-apply dl hint if network detection already settled
-  if (window._dlSettled) {
-    applyDlHint(window._dlGiteeOk);
-  }
 }
 
 function toggleLang() {
   setLang(currentLang === "zh" ? "en" : "zh");
-}
-
-function applyDlHint(giteeOk) {
-  window._dlSettled = true;
-  window._dlGiteeOk = giteeOk;
-  var hint = document.getElementById("dl-hint");
-  var key = giteeOk ? "dl_hint_gitee" : "dl_hint_github";
-  hint.innerHTML = I18N[currentLang][key];
 }
 
 // Init: detect browser language or load preference
@@ -556,25 +540,7 @@ function applyDlHint(giteeOk) {
   }
 })();
 
-// Network detection: try loading Gitee favicon
-(function () {
-  var gitee = document.getElementById('btn-gitee');
-  var github = document.getElementById('btn-github');
-  var img = new Image();
-  var done = false;
-  var timer = setTimeout(function () { settle(false); }, 3000);
-  function settle(ok) {
-    if (done) return; done = true; clearTimeout(timer);
-    applyDlHint(ok);
-    if (!ok) {
-      github.classList.remove('btn-ghost'); github.classList.add('btn-primary');
-      gitee.classList.add('btn-ghost'); gitee.classList.remove('btn-primary');
-    }
-  }
-  img.onload = function () { settle(true); };
-  img.onerror = function () { settle(false); };
-  img.src = 'https://gitee.com/favicon.ico?_t=' + Date.now();
-})();
+// Network detection removed: GitHub is primary, Gitee is secondary (always)
 </script>
 </body>
 </html>
